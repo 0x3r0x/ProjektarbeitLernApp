@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjektarbeitLernApp", "ProjektarbeitLernApp\ProjektarbeitLernApp.csproj", "{CD5D0861-3686-4822-A43F-60F29E633125}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjektarbeitLernAppGUI", "ProjektarbeitLernAppGUI\ProjektarbeitLernAppGUI.csproj", "{9E4D6BF4-8DAD-49ED-80EF-F52F834848E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{CD5D0861-3686-4822-A43F-60F29E633125}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD5D0861-3686-4822-A43F-60F29E633125}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD5D0861-3686-4822-A43F-60F29E633125}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E4D6BF4-8DAD-49ED-80EF-F52F834848E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E4D6BF4-8DAD-49ED-80EF-F52F834848E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E4D6BF4-8DAD-49ED-80EF-F52F834848E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E4D6BF4-8DAD-49ED-80EF-F52F834848E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
