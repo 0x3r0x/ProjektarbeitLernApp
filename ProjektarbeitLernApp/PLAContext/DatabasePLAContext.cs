@@ -22,5 +22,7 @@ namespace ProjektarbeitLernApp.PLAContext
             optionsBuilder.UseMySql("Server=localhost;Database=projektlernapp;User=root;Password=;",
                                     new MariaDbServerVersion(new Version(10, 4, 28)));
         }
+
+        //protected override void OnModelCreating(DbContextOptionsBuilder)
     }
 }

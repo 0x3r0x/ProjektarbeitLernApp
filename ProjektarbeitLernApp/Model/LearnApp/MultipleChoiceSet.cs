@@ -12,7 +12,6 @@ namespace ProjektarbeitLernApp.Model.LearnApp
         [Key]
         public int Id { get; set; }
         public string Question { get; set; }
-        public string Answers { get; set; }
-
+        public string Answers { get; set; } //JSON
     }
 }
