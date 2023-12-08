@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             pictureBox1 = new PictureBox();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            txtPassword = new TextBox();
+            txtEmail = new TextBox();
             button1 = new Button();
             button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -47,21 +47,24 @@
             pictureBox1.TabIndex = 8;
             pictureBox1.TabStop = false;
             // 
-            // textBox1
+            // txtPassword
             // 
-            textBox1.Location = new Point(12, 275);
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Passwort";
-            textBox1.Size = new Size(228, 23);
-            textBox1.TabIndex = 9;
+            txtPassword.Location = new Point(12, 275);
+            txtPassword.Name = "txtPassword";
+            txtPassword.PasswordChar = '*';
+            txtPassword.PlaceholderText = "Passwort";
+            txtPassword.Size = new Size(228, 23);
+            txtPassword.TabIndex = 9;
+            txtPassword.Text = "12345678";
             // 
-            // textBox2
+            // txtEmail
             // 
-            textBox2.Location = new Point(12, 246);
-            textBox2.Name = "textBox2";
-            textBox2.PlaceholderText = "E-Mail";
-            textBox2.Size = new Size(228, 23);
-            textBox2.TabIndex = 10;
+            txtEmail.Location = new Point(12, 246);
+            txtEmail.Name = "txtEmail";
+            txtEmail.PlaceholderText = "E-Mail";
+            txtEmail.Size = new Size(228, 23);
+            txtEmail.TabIndex = 10;
+            txtEmail.Text = "mail@huelsmann-andreas.de";
             // 
             // button1
             // 
@@ -71,6 +74,7 @@
             button1.TabIndex = 11;
             button1.Text = "Login";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
@@ -80,6 +84,7 @@
             button2.TabIndex = 20;
             button2.Text = "Du hast kein Profil? Hier registrieren";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // Login
             // 
@@ -88,8 +93,8 @@
             ClientSize = new Size(255, 362);
             Controls.Add(button2);
             Controls.Add(button1);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(txtEmail);
+            Controls.Add(txtPassword);
             Controls.Add(pictureBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Login";
@@ -102,8 +107,8 @@
         #endregion
 
         private PictureBox pictureBox1;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox txtPassword;
+        private TextBox txtEmail;
         private Button button1;
         private Button button2;
     }

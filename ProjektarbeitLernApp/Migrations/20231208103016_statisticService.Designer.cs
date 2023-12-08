@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjektarbeitLernApp.PLAContext;
 
@@ -10,9 +11,11 @@ using ProjektarbeitLernApp.PLAContext;
 namespace ProjektarbeitLernApp.Migrations
 {
     [DbContext(typeof(DatabasePLAContext))]
-    partial class DatabasePLAContextModelSnapshot : ModelSnapshot
+    [Migration("20231208103016_statisticService")]
+    partial class statisticService
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,6 +86,12 @@ namespace ProjektarbeitLernApp.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Student_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WasKnown")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WasNotKnown")
                         .HasColumnType("int");
 
                     b.Property<bool>("WasShown")

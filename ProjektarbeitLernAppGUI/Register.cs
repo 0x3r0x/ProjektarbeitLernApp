@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjektarbeitLernApp.PLAContext;
+using ProjektarbeitLernApp.Service;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +15,26 @@ namespace ProjektarbeitLernAppGUI
 {
     public partial class Register : Form
     {
-        public Register()
+        private UserService userService;
+        private DatabasePLAContext dbContext;
+
+        public Register(DatabasePLAContext dbContext)
         {
+            var userService = new UserService(dbContext);
+            this.dbContext = dbContext;
+            this.userService = userService;
+
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
+
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var loginForm = new Login(dbContext);
+            loginForm.Show();
+            this.Hide();
+        }
+
     }
 }

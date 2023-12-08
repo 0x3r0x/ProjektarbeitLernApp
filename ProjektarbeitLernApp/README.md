@@ -31,10 +31,10 @@
 - Planung der Benutzeroberfläche: 4 Stunden
 
 ### Implementierungsphase (Gesamtzeit: 44 Stunden)
+- Implementierung der Authentifizierung und Sicherheitsfeatures: 5 Stunden
 - Entwicklung des Multiple-Choice-Lernsystem: 12 Stunden
 - Entwicklung der Routinen und Lernmodi: 12 Stunden
 - Integration der Lehrer- und Schülerinterfaces: 12 Stunden
-- Implementierung der Authentifizierung und Sicherheitsfeatures: 5 Stunden
 - Anbindung an die MySQL-Datenbank: 3 Stunden
 
 ### Testphase (Gesamtzeit: 10 Stunden)

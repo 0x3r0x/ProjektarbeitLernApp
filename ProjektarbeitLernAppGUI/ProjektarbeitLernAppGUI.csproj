@@ -11,6 +11,9 @@
 		<PackageReference Include="LiveChartsCore.SkiaSharpView.WinForms" Version="2.0.0-rc2" />
 	</ItemGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\ProjektarbeitLernApp\ProjektarbeitLernApp.csproj" />
+	</ItemGroup>
+	<ItemGroup>
 	  <Compile Update="Properties\Resources.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>

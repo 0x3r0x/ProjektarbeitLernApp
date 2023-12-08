@@ -107,6 +107,7 @@
             button2.TabIndex = 19;
             button2.Text = "Du hast ein Profil? Hier einloggen";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // Register
             // 

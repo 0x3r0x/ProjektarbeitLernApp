@@ -15,7 +15,7 @@ namespace ProjektarbeitLernApp.PLAContext
         public DbSet<MultipleChoiceSet> MultipleChoiceSet { get; set; }
         public DbSet<LearnProgress> LearnProgress { get; set; }
         public DbSet<ExamSimulation> ExamSimulation { get; set; }
-
+        public DbSet<Statistic> Statistic { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
