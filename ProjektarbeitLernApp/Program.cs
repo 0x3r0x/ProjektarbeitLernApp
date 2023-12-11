@@ -49,6 +49,7 @@ internal class Program
 
             Console.WriteLine($"ID: {question.Id}, Question: {question.Question}");
             var answers = multipleChoiceSetService.GetAnswers(question.Id);
+
             foreach (var answer in answers)
             {
                 Console.WriteLine($"{answer.Id}) {answer.Answer}");
@@ -57,6 +58,7 @@ internal class Program
                 if (choice.ToUpper().Equals("J"))
                     answer.GivenAnswer = true;
             }
+
             var validateAnswer = learnProgressService.ValidateAnswer(answers);
             Console.WriteLine(validateAnswer);
             //var wasKnown = 0;

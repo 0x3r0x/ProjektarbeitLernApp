@@ -32,8 +32,6 @@ namespace ProjektarbeitLernApp.Service
             }
 
             return true;
-
-            //return givenAnswer.CorrectAnswer == givenAnswer.GivenAnswer ? true : false;
         }
 
         public void SaveLearnProgress(LearnProgress learnProgress)

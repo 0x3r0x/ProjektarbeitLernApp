@@ -29,41 +29,42 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Register));
-            button1 = new Button();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
+            btnRegister = new Button();
+            txtEmail = new TextBox();
+            txtPassword1 = new TextBox();
             pictureBox1 = new PictureBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
-            button2 = new Button();
+            txtPassword2 = new TextBox();
+            txtName = new TextBox();
+            txtLastName = new TextBox();
+            btnShowLogin = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // button1
+            // btnRegister
             // 
-            button1.Location = new Point(12, 391);
-            button1.Name = "button1";
-            button1.Size = new Size(228, 23);
-            button1.TabIndex = 15;
-            button1.Text = "Registrieren";
-            button1.UseVisualStyleBackColor = true;
+            btnRegister.Location = new Point(12, 391);
+            btnRegister.Name = "btnRegister";
+            btnRegister.Size = new Size(228, 23);
+            btnRegister.TabIndex = 1;
+            btnRegister.Text = "Registrieren";
+            btnRegister.UseVisualStyleBackColor = true;
+            btnRegister.Click += btnRegister_Click;
             // 
-            // textBox2
+            // txtEmail
             // 
-            textBox2.Location = new Point(12, 304);
-            textBox2.Name = "textBox2";
-            textBox2.PlaceholderText = "E-Mail";
-            textBox2.Size = new Size(228, 23);
-            textBox2.TabIndex = 14;
+            txtEmail.Location = new Point(12, 304);
+            txtEmail.Name = "txtEmail";
+            txtEmail.PlaceholderText = "E-Mail";
+            txtEmail.Size = new Size(228, 23);
+            txtEmail.TabIndex = 5;
             // 
-            // textBox1
+            // txtPassword1
             // 
-            textBox1.Location = new Point(12, 333);
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Passwort";
-            textBox1.Size = new Size(228, 23);
-            textBox1.TabIndex = 13;
+            txtPassword1.Location = new Point(12, 333);
+            txtPassword1.Name = "txtPassword1";
+            txtPassword1.PlaceholderText = "Passwort";
+            txtPassword1.Size = new Size(228, 23);
+            txtPassword1.TabIndex = 6;
             // 
             // pictureBox1
             // 
@@ -75,52 +76,52 @@
             pictureBox1.TabIndex = 12;
             pictureBox1.TabStop = false;
             // 
-            // textBox3
+            // txtPassword2
             // 
-            textBox3.Location = new Point(12, 362);
-            textBox3.Name = "textBox3";
-            textBox3.PlaceholderText = "Passwort wiederholen";
-            textBox3.Size = new Size(228, 23);
-            textBox3.TabIndex = 16;
+            txtPassword2.Location = new Point(12, 362);
+            txtPassword2.Name = "txtPassword2";
+            txtPassword2.PlaceholderText = "Passwort wiederholen";
+            txtPassword2.Size = new Size(228, 23);
+            txtPassword2.TabIndex = 7;
             // 
-            // textBox4
+            // txtName
             // 
-            textBox4.Location = new Point(12, 246);
-            textBox4.Name = "textBox4";
-            textBox4.PlaceholderText = "Vorname";
-            textBox4.Size = new Size(228, 23);
-            textBox4.TabIndex = 17;
+            txtName.Location = new Point(12, 246);
+            txtName.Name = "txtName";
+            txtName.PlaceholderText = "Vorname";
+            txtName.Size = new Size(228, 23);
+            txtName.TabIndex = 3;
             // 
-            // textBox5
+            // txtLastName
             // 
-            textBox5.Location = new Point(12, 275);
-            textBox5.Name = "textBox5";
-            textBox5.PlaceholderText = "Nachname";
-            textBox5.Size = new Size(228, 23);
-            textBox5.TabIndex = 18;
+            txtLastName.Location = new Point(12, 275);
+            txtLastName.Name = "txtLastName";
+            txtLastName.PlaceholderText = "Nachname";
+            txtLastName.Size = new Size(228, 23);
+            txtLastName.TabIndex = 4;
             // 
-            // button2
+            // btnShowLogin
             // 
-            button2.Location = new Point(12, 420);
-            button2.Name = "button2";
-            button2.Size = new Size(228, 23);
-            button2.TabIndex = 19;
-            button2.Text = "Du hast ein Profil? Hier einloggen";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            btnShowLogin.Location = new Point(12, 420);
+            btnShowLogin.Name = "btnShowLogin";
+            btnShowLogin.Size = new Size(228, 23);
+            btnShowLogin.TabIndex = 2;
+            btnShowLogin.Text = "Du hast ein Profil? Hier einloggen";
+            btnShowLogin.UseVisualStyleBackColor = true;
+            btnShowLogin.Click += btnShowLogin_Click;
             // 
             // Register
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(255, 455);
-            Controls.Add(button2);
-            Controls.Add(textBox5);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(button1);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(btnShowLogin);
+            Controls.Add(txtLastName);
+            Controls.Add(txtName);
+            Controls.Add(txtPassword2);
+            Controls.Add(btnRegister);
+            Controls.Add(txtEmail);
+            Controls.Add(txtPassword1);
             Controls.Add(pictureBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Register";
@@ -132,13 +133,13 @@
 
         #endregion
 
-        private Button button1;
-        private TextBox textBox2;
-        private TextBox textBox1;
+        private Button btnRegister;
+        private TextBox txtEmail;
+        private TextBox txtPassword1;
         private PictureBox pictureBox1;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private TextBox textBox5;
-        private Button button2;
+        private TextBox txtPassword2;
+        private TextBox txtName;
+        private TextBox txtLastName;
+        private Button btnShowLogin;
     }
 }

@@ -20,7 +20,7 @@ namespace ProjektarbeitLernApp.Service
             {
                 foreach (Task task in ts.AllTasks)
                 {
-                    if (task.Name.StartsWith(routinePrefix + routineName, StringComparison.OrdinalIgnoreCase))
+                    if (task.Name.StartsWith(routineName, StringComparison.OrdinalIgnoreCase))
                     {
                         try
                         {
@@ -60,20 +60,26 @@ namespace ProjektarbeitLernApp.Service
 
         public List<Task> GetAll()
         {
-            List<Task> projectWorkTasks = new List<Task>();
-
-            using (TaskService ts = new TaskService())
+            try
             {
-                foreach (Task task in ts.AllTasks)
+                List<Task> projectWorkTasks = new List<Task>();
+
+                using (TaskService ts = new TaskService())
                 {
-                    if (task.Name.StartsWith(routinePrefix, StringComparison.OrdinalIgnoreCase))
+                    foreach (Task task in ts.AllTasks)
                     {
-                        projectWorkTasks.Add(task);
+                        if (task.Name.StartsWith(routinePrefix, StringComparison.OrdinalIgnoreCase))
+                        {
+                            projectWorkTasks.Add(task);
+                        }
                     }
                 }
+                return projectWorkTasks;
             }
-
-            return projectWorkTasks;
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public bool Create(string routineName, DateTime startTime)
@@ -83,7 +89,7 @@ namespace ProjektarbeitLernApp.Service
                 TaskService ts = new TaskService();
                 TaskDefinition td = ts.NewTask();
                 Trigger trigger = new DailyTrigger();
-                trigger.StartBoundary = startTime; // new DateTime(2023, 12, 8, 9, 57, 00);
+                trigger.StartBoundary = startTime; 
                 td.Triggers.Add(trigger);
                 td.Actions.Add(new ExecAction(exePath, null, null));
                 ts.RootFolder.RegisterTaskDefinition(routinePrefix + routineName, td);
@@ -96,8 +102,5 @@ namespace ProjektarbeitLernApp.Service
             }
 
         }
-
-
-
     }
 }

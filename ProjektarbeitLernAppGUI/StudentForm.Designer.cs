@@ -42,12 +42,8 @@
             tabPage1 = new TabPage();
             button4 = new Button();
             panel2 = new Panel();
-            label2 = new Label();
-            checkBox5 = new CheckBox();
-            checkBox6 = new CheckBox();
-            checkBox7 = new CheckBox();
-            checkBox8 = new CheckBox();
             tabPage4 = new TabPage();
+            button7 = new Button();
             button5 = new Button();
             dateTimePicker2 = new DateTimePicker();
             button3 = new Button();
@@ -67,7 +63,8 @@
             textBox2 = new TextBox();
             button6 = new Button();
             pictureBox1 = new PictureBox();
-            button7 = new Button();
+            label1 = new Label();
+            dataGridView3 = new DataGridView();
             tabControl1.SuspendLayout();
             tabPage3.SuspendLayout();
             panel1.SuspendLayout();
@@ -79,6 +76,7 @@
             tabPage5.SuspendLayout();
             tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -96,6 +94,7 @@
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(1105, 545);
             tabControl1.TabIndex = 6;
+            tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             // 
             // tabPage3
             // 
@@ -174,7 +173,6 @@
             dataGridView2.AllowUserToAddRows = false;
             dataGridView2.AllowUserToDeleteRows = false;
             dataGridView2.AllowUserToResizeColumns = false;
-            dataGridView2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView2.BackgroundColor = SystemColors.Control;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView2.ColumnHeadersVisible = false;
@@ -191,7 +189,7 @@
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowHeadersVisible = false;
             dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView2.Size = new Size(1077, 285);
+            dataGridView2.Size = new Size(1083, 285);
             dataGridView2.TabIndex = 4;
             // 
             // lblQuestion
@@ -201,7 +199,7 @@
             lblQuestion.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblQuestion.Location = new Point(0, 0);
             lblQuestion.Name = "lblQuestion";
-            lblQuestion.Size = new Size(1077, 67);
+            lblQuestion.Size = new Size(1083, 67);
             lblQuestion.TabIndex = 4;
             lblQuestion.Text = "Wer ist verantwortlich für die Implementierung und Pflege der Definition of Done (DoD) in einem Scrum-Team und warum?";
             lblQuestion.TextAlign = ContentAlignment.MiddleCenter;
@@ -231,73 +229,12 @@
             // panel2
             // 
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panel2.Controls.Add(label2);
-            panel2.Controls.Add(checkBox5);
-            panel2.Controls.Add(checkBox6);
-            panel2.Controls.Add(checkBox7);
-            panel2.Controls.Add(checkBox8);
+            panel2.Controls.Add(dataGridView3);
+            panel2.Controls.Add(label1);
             panel2.Location = new Point(8, 9);
             panel2.Name = "panel2";
             panel2.Size = new Size(1083, 357);
             panel2.TabIndex = 4;
-            // 
-            // label2
-            // 
-            label2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label2.BackColor = Color.LightGray;
-            label2.Location = new Point(3, 3);
-            label2.Name = "label2";
-            label2.Size = new Size(1077, 67);
-            label2.TabIndex = 4;
-            label2.Text = "Wer ist verantwortlich für die Implementierung und Pflege der Definition of Done (DoD) in einem Scrum-Team und warum?";
-            // 
-            // checkBox5
-            // 
-            checkBox5.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            checkBox5.BackColor = Color.LightGray;
-            checkBox5.Location = new Point(3, 73);
-            checkBox5.Name = "checkBox5";
-            checkBox5.Size = new Size(1077, 56);
-            checkBox5.TabIndex = 3;
-            checkBox5.Text = resources.GetString("checkBox5.Text");
-            checkBox5.TextAlign = ContentAlignment.MiddleCenter;
-            checkBox5.UseVisualStyleBackColor = false;
-            // 
-            // checkBox6
-            // 
-            checkBox6.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            checkBox6.BackColor = Color.LightGray;
-            checkBox6.Location = new Point(3, 135);
-            checkBox6.Name = "checkBox6";
-            checkBox6.Size = new Size(1077, 56);
-            checkBox6.TabIndex = 2;
-            checkBox6.Text = resources.GetString("checkBox6.Text");
-            checkBox6.TextAlign = ContentAlignment.MiddleCenter;
-            checkBox6.UseVisualStyleBackColor = false;
-            // 
-            // checkBox7
-            // 
-            checkBox7.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            checkBox7.BackColor = Color.LightGray;
-            checkBox7.Location = new Point(3, 197);
-            checkBox7.Name = "checkBox7";
-            checkBox7.Size = new Size(1077, 56);
-            checkBox7.TabIndex = 1;
-            checkBox7.Text = resources.GetString("checkBox7.Text");
-            checkBox7.TextAlign = ContentAlignment.MiddleCenter;
-            checkBox7.UseVisualStyleBackColor = false;
-            // 
-            // checkBox8
-            // 
-            checkBox8.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            checkBox8.BackColor = Color.LightGray;
-            checkBox8.Location = new Point(3, 259);
-            checkBox8.Name = "checkBox8";
-            checkBox8.Size = new Size(1077, 56);
-            checkBox8.TabIndex = 0;
-            checkBox8.Text = resources.GetString("checkBox8.Text");
-            checkBox8.TextAlign = ContentAlignment.MiddleCenter;
-            checkBox8.UseVisualStyleBackColor = false;
             // 
             // tabPage4
             // 
@@ -315,6 +252,16 @@
             tabPage4.Text = "Routinen";
             tabPage4.UseVisualStyleBackColor = true;
             // 
+            // button7
+            // 
+            button7.Location = new Point(950, 37);
+            button7.Name = "button7";
+            button7.Size = new Size(141, 23);
+            button7.TabIndex = 6;
+            button7.Text = "Alle Entfernen";
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
+            // 
             // button5
             // 
             button5.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
@@ -324,6 +271,7 @@
             button5.TabIndex = 5;
             button5.Text = "Entfernen";
             button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
             // 
             // dateTimePicker2
             // 
@@ -505,15 +453,26 @@
             pictureBox1.TabIndex = 7;
             pictureBox1.TabStop = false;
             // 
-            // button7
+            // label1
             // 
-            button7.Location = new Point(950, 37);
-            button7.Name = "button7";
-            button7.Size = new Size(141, 23);
-            button7.TabIndex = 6;
-            button7.Text = "Alle Entfernen";
-            button7.UseVisualStyleBackColor = true;
-            button7.Click += button7_Click;
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            label1.BackColor = SystemColors.Control;
+            label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(0, 3);
+            label1.Name = "label1";
+            label1.Size = new Size(1083, 67);
+            label1.TabIndex = 5;
+            label1.Text = "Wer ist verantwortlich für die Implementierung und Pflege der Definition of Done (DoD) in einem Scrum-Team und warum?";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // dataGridView3
+            // 
+            dataGridView3.BackgroundColor = SystemColors.Control;
+            dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView3.Location = new Point(0, 70);
+            dataGridView3.Name = "dataGridView3";
+            dataGridView3.Size = new Size(1083, 287);
+            dataGridView3.TabIndex = 6;
             // 
             // Form1
             // 
@@ -541,6 +500,7 @@
             tabPage6.ResumeLayout(false);
             tabPage6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
             ResumeLayout(false);
         }
 
@@ -557,11 +517,6 @@
         private TabPage tabPage1;
         private Button button4;
         private Panel panel2;
-        private Label label2;
-        private CheckBox checkBox5;
-        private CheckBox checkBox6;
-        private CheckBox checkBox7;
-        private CheckBox checkBox8;
         private DataGridView dataGridView1;
         private Button button3;
         private DateTimePicker dateTimePicker1;
@@ -584,5 +539,7 @@
         private Button btnNotKnown;
         private Button btnKnown;
         private Button button7;
+        private Label label1;
+        private DataGridView dataGridView3;
     }
 }

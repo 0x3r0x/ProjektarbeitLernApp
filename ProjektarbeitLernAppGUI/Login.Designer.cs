@@ -32,8 +32,8 @@
             pictureBox1 = new PictureBox();
             txtPassword = new TextBox();
             txtEmail = new TextBox();
-            button1 = new Button();
-            button2 = new Button();
+            btnLogin = new Button();
+            btnShowRegister = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -54,7 +54,7 @@
             txtPassword.PasswordChar = '*';
             txtPassword.PlaceholderText = "Passwort";
             txtPassword.Size = new Size(228, 23);
-            txtPassword.TabIndex = 9;
+            txtPassword.TabIndex = 4;
             txtPassword.Text = "12345678";
             // 
             // txtEmail
@@ -63,36 +63,36 @@
             txtEmail.Name = "txtEmail";
             txtEmail.PlaceholderText = "E-Mail";
             txtEmail.Size = new Size(228, 23);
-            txtEmail.TabIndex = 10;
+            txtEmail.TabIndex = 3;
             txtEmail.Text = "mail@huelsmann-andreas.de";
             // 
-            // button1
+            // btnLogin
             // 
-            button1.Location = new Point(12, 304);
-            button1.Name = "button1";
-            button1.Size = new Size(228, 23);
-            button1.TabIndex = 11;
-            button1.Text = "Login";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnLogin.Location = new Point(12, 304);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(228, 23);
+            btnLogin.TabIndex = 1;
+            btnLogin.Text = "Login";
+            btnLogin.UseVisualStyleBackColor = true;
+            btnLogin.Click += btnLogin_Click;
             // 
-            // button2
+            // btnShowRegister
             // 
-            button2.Location = new Point(12, 333);
-            button2.Name = "button2";
-            button2.Size = new Size(228, 23);
-            button2.TabIndex = 20;
-            button2.Text = "Du hast kein Profil? Hier registrieren";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            btnShowRegister.Location = new Point(12, 333);
+            btnShowRegister.Name = "btnShowRegister";
+            btnShowRegister.Size = new Size(228, 23);
+            btnShowRegister.TabIndex = 2;
+            btnShowRegister.Text = "Du hast kein Profil? Hier registrieren";
+            btnShowRegister.UseVisualStyleBackColor = true;
+            btnShowRegister.Click += btnShowRegister_Click;
             // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(255, 362);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnShowRegister);
+            Controls.Add(btnLogin);
             Controls.Add(txtEmail);
             Controls.Add(txtPassword);
             Controls.Add(pictureBox1);
@@ -109,7 +109,7 @@
         private PictureBox pictureBox1;
         private TextBox txtPassword;
         private TextBox txtEmail;
-        private Button button1;
-        private Button button2;
+        private Button btnLogin;
+        private Button btnShowRegister;
     }
 }

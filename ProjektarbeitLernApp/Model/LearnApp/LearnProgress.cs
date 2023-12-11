@@ -15,9 +15,5 @@ namespace ProjektarbeitLernApp.Model.LearnApp
         public int MultipleChoiceSet_Id { get; set; }
         public int Stage { get; set; }
         public bool WasShown { get; set; }
-
-        //public int WasKnown { get; set; }
-        //public int WasNotKnown { get; set; }
-
     }
 }

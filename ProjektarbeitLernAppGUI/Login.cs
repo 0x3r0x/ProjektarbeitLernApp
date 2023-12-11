@@ -27,14 +27,14 @@ namespace ProjektarbeitLernAppGUI
             this.StartPosition = FormStartPosition.CenterScreen;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnShowRegister_Click(object sender, EventArgs e)
         {
             var registerForm = new Register(dbContext);
             registerForm.Show();
             this.Hide();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
             var user = new User();
             user.Email = txtEmail.Text;
@@ -44,10 +44,11 @@ namespace ProjektarbeitLernAppGUI
             if (isValigLogin)
             {
                 user.Id = userService.GetUserId(user);
-                var mainForm = new Form1(dbContext, user);
+                var mainForm = new StudentForm(dbContext, user);
                 mainForm.Show();
                 this.Hide();
             }
         }
+
     }
 }

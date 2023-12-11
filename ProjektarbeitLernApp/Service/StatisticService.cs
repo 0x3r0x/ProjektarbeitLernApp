@@ -50,9 +50,5 @@ namespace ProjektarbeitLernApp.Service
             return res;
         }
 
-        //TODO: - beantwortete Fragen von heute
-        //      - gewusst / nicht gewusst von heute
-        //      - gesamt gewusst / nicht gewusst
-        //      - prüfungsreife
     }
 }

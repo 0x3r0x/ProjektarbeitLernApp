@@ -23,6 +23,5 @@ namespace ProjektarbeitLernApp.PLAContext
                                     new MariaDbServerVersion(new Version(10, 4, 28)));
         }
 
-        //protected override void OnModelCreating(DbContextOptionsBuilder)
     }
 }

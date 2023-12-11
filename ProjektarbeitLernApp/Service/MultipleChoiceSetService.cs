@@ -22,38 +22,21 @@ namespace ProjektarbeitLernApp.Service
             this.dbContext = dbContext;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         public MultipleChoiceSet GetNewQuestion()
         {
             return dbContext.MultipleChoiceSet.OrderBy(r => EF.Functions.Random()).First();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         public MultipleChoiceSet GetSpecificQuestion(int id)
         {
             return dbContext.MultipleChoiceSet.FirstOrDefault(e => e.Id.Equals(id));
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         public List<MultipleChoiceSet> GetAllQuestions()
         {
             return dbContext.MultipleChoiceSet.ToList();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="numberOfQuestions"></param>
-        /// <returns></returns>
         public List<MultipleChoiceSet> GetMultipleChoiceSets(int numberOfQuestions)
         {
             var questions = new List<MultipleChoiceSet>();
@@ -68,11 +51,6 @@ namespace ProjektarbeitLernApp.Service
             return questions;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public List<Answers> GetAnswers(int id)
         {
             var question = dbContext.MultipleChoiceSet.FirstOrDefault(e => e.Id.Equals(id));

@@ -17,11 +17,6 @@ namespace ProjektarbeitLernAppGUI
 
             var dbContext = new DatabasePLAContext();
 
-            //var userService = new UserService(dbContext);
-            //var multipleChoiceSetService = new MultipleChoiceSetService(dbContext);
-            //var statisticService = new StatisticService(dbContext);
-            //var learnProgressService = new LearnProgressService(dbContext, statisticService);
-
             //Application.Run(new Form1());
             Application.Run(new Login(dbContext));
             //Application.Run(new Register(dbContext));
