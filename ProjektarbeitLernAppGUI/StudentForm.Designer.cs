@@ -1,6 +1,6 @@
 ﻿namespace ProjektarbeitLernAppGUI
 {
-    partial class Form1
+    partial class StudentForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentForm));
             tabControl1 = new TabControl();
             tabPage3 = new TabPage();
             btnNotKnown = new Button();
@@ -40,8 +41,18 @@
             dataGridView2 = new DataGridView();
             lblQuestion = new Label();
             tabPage1 = new TabPage();
+            panel4 = new Panel();
+            label1 = new Label();
+            button10 = new Button();
+            label4 = new Label();
+            button9 = new Button();
+            button8 = new Button();
             button4 = new Button();
             panel2 = new Panel();
+            tabControl2 = new TabControl();
+            tabPage2 = new TabPage();
+            tabPage7 = new TabPage();
+            progressBar2 = new ProgressBar();
             tabPage4 = new TabPage();
             button7 = new Button();
             button5 = new Button();
@@ -51,6 +62,8 @@
             textBox1 = new TextBox();
             dataGridView1 = new DataGridView();
             tabPage5 = new TabPage();
+            panel3 = new Panel();
+            label2 = new Label();
             label3 = new Label();
             progressBar1 = new ProgressBar();
             pieChart1 = new LiveChartsCore.SkiaSharpView.WinForms.PieChart();
@@ -63,20 +76,21 @@
             textBox2 = new TextBox();
             button6 = new Button();
             pictureBox1 = new PictureBox();
-            label1 = new Label();
-            dataGridView3 = new DataGridView();
+            timer1 = new System.Windows.Forms.Timer(components);
             tabControl1.SuspendLayout();
             tabPage3.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             tabPage1.SuspendLayout();
+            panel4.SuspendLayout();
             panel2.SuspendLayout();
+            tabControl2.SuspendLayout();
             tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             tabPage5.SuspendLayout();
+            panel3.SuspendLayout();
             tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -206,6 +220,10 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(panel4);
+            tabPage1.Controls.Add(label4);
+            tabPage1.Controls.Add(button9);
+            tabPage1.Controls.Add(button8);
             tabPage1.Controls.Add(button4);
             tabPage1.Controls.Add(panel2);
             tabPage1.Location = new Point(4, 52);
@@ -215,26 +233,126 @@
             tabPage1.Text = "Prüfungssimulation";
             tabPage1.UseVisualStyleBackColor = true;
             // 
+            // panel4
+            // 
+            panel4.Controls.Add(label1);
+            panel4.Controls.Add(button10);
+            panel4.Location = new Point(3, 3);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(1091, 483);
+            panel4.TabIndex = 8;
+            // 
+            // label1
+            // 
+            label1.Location = new Point(0, 216);
+            label1.Name = "label1";
+            label1.Size = new Size(1091, 23);
+            label1.TabIndex = 1;
+            label1.Text = "Du hast 30 Minuten Zeit für diese Prüfungssimulation. Wenn du bereit bist, klicke einfach auf \"Jetzt Starten\"";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // button10
+            // 
+            button10.Location = new Point(8, 324);
+            button10.Name = "button10";
+            button10.Size = new Size(1073, 23);
+            button10.TabIndex = 0;
+            button10.Text = "Jetzt Starten";
+            button10.UseVisualStyleBackColor = true;
+            button10.Click += button10_Click;
+            // 
+            // label4
+            // 
+            label4.Location = new Point(3, 339);
+            label4.Name = "label4";
+            label4.Size = new Size(1091, 23);
+            label4.TabIndex = 9;
+            label4.Text = "00:30:00";
+            label4.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // button9
+            // 
+            button9.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button9.Location = new Point(8, 370);
+            button9.Name = "button9";
+            button9.Size = new Size(179, 116);
+            button9.TabIndex = 7;
+            button9.Text = "Abgeben";
+            button9.UseVisualStyleBackColor = true;
+            button9.Click += button9_Click;
+            // 
+            // button8
+            // 
+            button8.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button8.Enabled = false;
+            button8.Location = new Point(727, 373);
+            button8.Name = "button8";
+            button8.Size = new Size(179, 116);
+            button8.TabIndex = 6;
+            button8.Text = "Zurück";
+            button8.UseVisualStyleBackColor = true;
+            button8.Click += button8_Click;
+            // 
             // button4
             // 
             button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button4.Enabled = false;
             button4.Location = new Point(912, 373);
             button4.Name = "button4";
             button4.Size = new Size(179, 116);
             button4.TabIndex = 5;
             button4.Text = "Weiter";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // panel2
             // 
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panel2.Controls.Add(dataGridView3);
-            panel2.Controls.Add(label1);
+            panel2.Controls.Add(tabControl2);
+            panel2.Controls.Add(progressBar2);
             panel2.Location = new Point(8, 9);
             panel2.Name = "panel2";
             panel2.Size = new Size(1083, 357);
             panel2.TabIndex = 4;
+            // 
+            // tabControl2
+            // 
+            tabControl2.Controls.Add(tabPage2);
+            tabControl2.Controls.Add(tabPage7);
+            tabControl2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tabControl2.Location = new Point(3, 3);
+            tabControl2.Name = "tabControl2";
+            tabControl2.SelectedIndex = 0;
+            tabControl2.Size = new Size(1077, 309);
+            tabControl2.TabIndex = 7;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Location = new Point(4, 26);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(1069, 279);
+            tabPage2.TabIndex = 0;
+            tabPage2.Text = "tabPage2";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage7
+            // 
+            tabPage7.Location = new Point(4, 26);
+            tabPage7.Name = "tabPage7";
+            tabPage7.Padding = new Padding(3);
+            tabPage7.Size = new Size(1069, 279);
+            tabPage7.TabIndex = 1;
+            tabPage7.Text = "tabPage7";
+            tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // progressBar2
+            // 
+            progressBar2.Enabled = false;
+            progressBar2.Location = new Point(0, 335);
+            progressBar2.MarqueeAnimationSpeed = 0;
+            progressBar2.Name = "progressBar2";
+            progressBar2.Size = new Size(1083, 23);
+            progressBar2.TabIndex = 10;
             // 
             // tabPage4
             // 
@@ -275,9 +393,11 @@
             // 
             // dateTimePicker2
             // 
-            dateTimePicker2.Format = DateTimePickerFormat.Time;
+            dateTimePicker2.CustomFormat = "HH:mm";
+            dateTimePicker2.Format = DateTimePickerFormat.Custom;
             dateTimePicker2.Location = new Point(8, 61);
             dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.ShowUpDown = true;
             dateTimePicker2.Size = new Size(307, 23);
             dateTimePicker2.TabIndex = 4;
             // 
@@ -319,6 +439,7 @@
             // 
             // tabPage5
             // 
+            tabPage5.Controls.Add(panel3);
             tabPage5.Controls.Add(label3);
             tabPage5.Controls.Add(progressBar1);
             tabPage5.Controls.Add(pieChart1);
@@ -329,6 +450,25 @@
             tabPage5.TabIndex = 2;
             tabPage5.Text = "Statistiken";
             tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(label2);
+            panel3.Location = new Point(8, 3);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(1086, 483);
+            panel3.TabIndex = 4;
+            panel3.Visible = false;
+            // 
+            // label2
+            // 
+            label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(3, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(1078, 483);
+            label2.TabIndex = 0;
+            label2.Text = "Es sind noch keine Daten zum Abbilden vorhanden.";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
@@ -453,28 +593,12 @@
             pictureBox1.TabIndex = 7;
             pictureBox1.TabStop = false;
             // 
-            // label1
+            // timer1
             // 
-            label1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label1.BackColor = SystemColors.Control;
-            label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(0, 3);
-            label1.Name = "label1";
-            label1.Size = new Size(1083, 67);
-            label1.TabIndex = 5;
-            label1.Text = "Wer ist verantwortlich für die Implementierung und Pflege der Definition of Done (DoD) in einem Scrum-Team und warum?";
-            label1.TextAlign = ContentAlignment.MiddleCenter;
+            timer1.Interval = 1000;
+            timer1.Tick += timer1_Tick;
             // 
-            // dataGridView3
-            // 
-            dataGridView3.BackgroundColor = SystemColors.Control;
-            dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView3.Location = new Point(0, 70);
-            dataGridView3.Name = "dataGridView3";
-            dataGridView3.Size = new Size(1083, 287);
-            dataGridView3.TabIndex = 6;
-            // 
-            // Form1
+            // StudentForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -483,24 +607,26 @@
             Controls.Add(tabControl1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(1123, 594);
-            Name = "Form1";
-            Text = "Form1";
+            Name = "StudentForm";
+            Text = "LernApp - für Schüler";
             Load += Form1_Load;
             tabControl1.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             tabPage1.ResumeLayout(false);
+            panel4.ResumeLayout(false);
             panel2.ResumeLayout(false);
+            tabControl2.ResumeLayout(false);
             tabPage4.ResumeLayout(false);
             tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             tabPage5.ResumeLayout(false);
             tabPage5.PerformLayout();
+            panel3.ResumeLayout(false);
             tabPage6.ResumeLayout(false);
             tabPage6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
             ResumeLayout(false);
         }
 
@@ -539,7 +665,18 @@
         private Button btnNotKnown;
         private Button btnKnown;
         private Button button7;
+        private Panel panel3;
+        private Label label2;
+        private TabControl tabControl2;
+        private TabPage tabPage2;
+        private TabPage tabPage7;
+        private Button button8;
+        private Button button9;
+        private Panel panel4;
         private Label label1;
-        private DataGridView dataGridView3;
+        private Button button10;
+        private System.Windows.Forms.Timer timer1;
+        private Label label4;
+        private ProgressBar progressBar2;
     }
 }

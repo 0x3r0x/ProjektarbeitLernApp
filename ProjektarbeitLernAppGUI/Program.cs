@@ -16,13 +16,10 @@ namespace ProjektarbeitLernAppGUI
             ApplicationConfiguration.Initialize();
 
             var dbContext = new DatabasePLAContext();
-
             //Application.Run(new Form1());
             Application.Run(new Login(dbContext));
             //Application.Run(new Register(dbContext));
 
         }
-
-        //private static void 
     }
 }

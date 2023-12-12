@@ -24,7 +24,7 @@ namespace ProjektarbeitLernApp.Service
 
         public MultipleChoiceSet GetNewQuestion()
         {
-            return dbContext.MultipleChoiceSet.OrderBy(r => EF.Functions.Random()).First();
+            return dbContext.MultipleChoiceSet.AsNoTracking().OrderBy(r => EF.Functions.Random()).First();
         }
 
         public MultipleChoiceSet GetSpecificQuestion(int id)
@@ -44,7 +44,8 @@ namespace ProjektarbeitLernApp.Service
             while(questions.Count < numberOfQuestions)
             {
                 var question = GetNewQuestion();
-                if(!questions.Contains(question))
+                var alreadyInList = questions.Any(e => e.Question.Equals(question.Question));
+                if(!alreadyInList)
                     questions.Add(question);
             }
 
