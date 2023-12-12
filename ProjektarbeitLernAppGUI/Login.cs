@@ -44,9 +44,17 @@ namespace ProjektarbeitLernAppGUI
             if (isValigLogin)
             {
                 user.Id = userService.GetUserId(user);
-                var mainForm = new StudentForm(dbContext, user);
-                mainForm.Show();
-                this.Hide();
+                if (userService.IsStudent(user))
+                {
+                    var mainForm = new StudentForm(dbContext, user);
+                    mainForm.Show();
+                    this.Hide();
+                } else if(userService.IsTeacher(user)) 
+                {
+                    var mainForm = new TeacherForm(dbContext, user);
+                    mainForm.Show();
+                    this.Hide();
+                }
             }
         }
 

@@ -33,8 +33,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentForm));
             tabControl1 = new TabControl();
             tabPage3 = new TabPage();
-            btnNotKnown = new Button();
-            btnKnown = new Button();
             button2 = new Button();
             button1 = new Button();
             panel1 = new Panel();
@@ -112,8 +110,6 @@
             // 
             // tabPage3
             // 
-            tabPage3.Controls.Add(btnNotKnown);
-            tabPage3.Controls.Add(btnKnown);
             tabPage3.Controls.Add(button2);
             tabPage3.Controls.Add(button1);
             tabPage3.Controls.Add(panel1);
@@ -123,31 +119,6 @@
             tabPage3.TabIndex = 0;
             tabPage3.Text = "Lernen";
             tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // btnNotKnown
-            // 
-            btnNotKnown.BackColor = Color.DarkRed;
-            btnNotKnown.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnNotKnown.ForeColor = Color.White;
-            btnNotKnown.Location = new Point(8, 373);
-            btnNotKnown.Name = "btnNotKnown";
-            btnNotKnown.Size = new Size(710, 116);
-            btnNotKnown.TabIndex = 5;
-            btnNotKnown.Text = "nicht gewusst";
-            btnNotKnown.UseVisualStyleBackColor = false;
-            btnNotKnown.Visible = false;
-            // 
-            // btnKnown
-            // 
-            btnKnown.BackColor = Color.DarkGreen;
-            btnKnown.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnKnown.Location = new Point(8, 373);
-            btnKnown.Name = "btnKnown";
-            btnKnown.Size = new Size(710, 116);
-            btnKnown.TabIndex = 4;
-            btnKnown.Text = "gewusst";
-            btnKnown.UseVisualStyleBackColor = false;
-            btnKnown.Visible = false;
             // 
             // button2
             // 
@@ -239,7 +210,7 @@
             panel4.Controls.Add(button10);
             panel4.Location = new Point(3, 3);
             panel4.Name = "panel4";
-            panel4.Size = new Size(1091, 483);
+            panel4.Size = new Size(1091, 486);
             panel4.TabIndex = 8;
             // 
             // label1
@@ -285,7 +256,7 @@
             // 
             button8.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button8.Enabled = false;
-            button8.Location = new Point(727, 373);
+            button8.Location = new Point(724, 373);
             button8.Name = "button8";
             button8.Size = new Size(179, 116);
             button8.TabIndex = 6;
@@ -383,7 +354,7 @@
             // button5
             // 
             button5.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button5.Location = new Point(950, 8);
+            button5.Location = new Point(950, 2);
             button5.Name = "button5";
             button5.Size = new Size(141, 23);
             button5.TabIndex = 5;
@@ -434,7 +405,7 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(321, 3);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(623, 493);
+            dataGridView1.Size = new Size(623, 487);
             dataGridView1.TabIndex = 0;
             // 
             // tabPage5
@@ -576,7 +547,7 @@
             // 
             button6.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button6.Enabled = false;
-            button6.Location = new Point(912, 373);
+            button6.Location = new Point(912, 367);
             button6.Name = "button6";
             button6.Size = new Size(179, 116);
             button6.TabIndex = 6;

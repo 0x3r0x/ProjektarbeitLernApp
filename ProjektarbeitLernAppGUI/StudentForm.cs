@@ -36,7 +36,7 @@ namespace ProjektarbeitLernAppGUI
         private MultipleChoiceSet examQuestion;
         private ExamSimulationService examService;
         private Dictionary<TabPage, bool> tabPageValidationResults = new Dictionary<TabPage, bool>();
-        private TimeSpan examTime = TimeSpan.FromMinutes(30);
+        private TimeSpan examTime;
 
         private bool isValidationPerformed;
 
@@ -57,7 +57,7 @@ namespace ProjektarbeitLernAppGUI
 
             #region profile
             var userService = new UserService(dbContext);
-            var dbUser = userService.GetUser(user);
+            var dbUser = userService.GetUserById(user.Id);
             textBox2.Text = dbUser.Name;
             textBox3.Text = dbUser.LastName;
             textBox5.Text = dbUser.Email;
@@ -244,7 +244,7 @@ namespace ProjektarbeitLernAppGUI
 
         private bool ValidateExamGridView(DataGridView dataGridView)
         {
-            var isValid = false;
+            var isValid = true;
 
             foreach (DataGridViewRow row in dataGridView.Rows)
             {
@@ -259,17 +259,18 @@ namespace ProjektarbeitLernAppGUI
                         {
                             row.DefaultCellStyle.BackColor = Color.LightGreen;
                             row.DefaultCellStyle.SelectionBackColor = Color.LightGreen;
-                            isValid = true;
                         }
-                        else if (givenAnswer.Equals(true))
+                        else if (givenAnswer.Equals(true) && correctAnswer.Equals(false))
                         {
                             row.DefaultCellStyle.SelectionBackColor = Color.LightCoral;
                             row.DefaultCellStyle.BackColor = Color.LightCoral;
+                            isValid = false;
                         }
                         else if (givenAnswer.Equals(false) && correctAnswer.Equals(true))
                         {
-                            row.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
-                            row.DefaultCellStyle.BackColor = Color.LightBlue;
+                            row.DefaultCellStyle.SelectionBackColor = Color.LightGreen; //LightBlue
+                            row.DefaultCellStyle.BackColor = Color.LightGreen;
+                            isValid = false;
                         }
                     }
                 }
@@ -282,8 +283,6 @@ namespace ProjektarbeitLernAppGUI
         private void button1_Click(object sender, EventArgs e)
         {
             GetNewQuestion();
-            btnNotKnown.Visible = false;
-            btnKnown.Visible = false;
             button1.Enabled = false;
             button2.Enabled = true;
         }
@@ -309,6 +308,9 @@ namespace ProjektarbeitLernAppGUI
             panel4.Visible = true;
             label4.Text = "00:30:00";
             button9.Enabled = true;
+            button8.Enabled = false;
+            button4.Enabled = true;
+            examTime = TimeSpan.FromMinutes(1);
 
             examList = new List<MultipleChoiceSet>();
             examService = new ExamSimulationService(learnProgressService, multipleChoiceSetService);
@@ -560,12 +562,7 @@ namespace ProjektarbeitLernAppGUI
 
             label4.Text = examTime.ToString("hh\\:mm\\:ss");
 
-            int newProgressValue = (int)examTime.TotalSeconds;
-            if (newProgressValue < progressBar2.Maximum)
-            {
-                progressBar2.Value = progressBar2.Maximum;
-                progressBar2.Value = newProgressValue;
-            }
+            progressBar2.Value = (int)examTime.TotalSeconds;
 
             if (examTime.TotalSeconds <= 0)
             {

@@ -54,6 +54,11 @@ namespace ProjektarbeitLernApp.Service
             return false;
         }
 
+        public List<User> GetAllStudents()
+        {
+            return dbContext.User.Where(e => e.Role.Equals((int)Role.Student)).ToList();
+        }
+
         public int GetUserId(User user)
         {
             var findUser = dbContext.User.FirstOrDefault(e => e.Email.Equals(user.Email));
@@ -63,9 +68,9 @@ namespace ProjektarbeitLernApp.Service
             return findUser.Id;
         }
 
-        public User GetUser(User user)
+        public User GetUserById(int userId)
         {
-            var findUser = dbContext.User.FirstOrDefault(e => e.Email.Equals(user.Email));
+            var findUser = dbContext.User.FirstOrDefault(e => e.Id.Equals(userId));
             return findUser;
         }
 
