@@ -33,7 +33,10 @@
             cartesianChart1 = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
             pieChart1 = new LiveChartsCore.SkiaSharpView.WinForms.PieChart();
             progressBar1 = new ProgressBar();
+            panel1 = new Panel();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridView1
@@ -73,11 +76,30 @@
             progressBar1.TabIndex = 3;
             progressBar1.Value = 20;
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(label1);
+            panel1.Location = new Point(12, 12);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(776, 645);
+            panel1.TabIndex = 4;
+            panel1.Visible = false;
+            // 
+            // label1
+            // 
+            label1.Location = new Point(3, 304);
+            label1.Name = "label1";
+            label1.Size = new Size(770, 90);
+            label1.TabIndex = 0;
+            label1.Text = "Es gibt keine Daten zum Auswerten.";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // TeacherForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 669);
+            Controls.Add(panel1);
             Controls.Add(progressBar1);
             Controls.Add(pieChart1);
             Controls.Add(cartesianChart1);
@@ -87,6 +109,7 @@
             Text = "LernApp - für Lehrer";
             Load += TeacherForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -96,5 +119,7 @@
         private LiveChartsCore.SkiaSharpView.WinForms.CartesianChart cartesianChart1;
         private LiveChartsCore.SkiaSharpView.WinForms.PieChart pieChart1;
         private ProgressBar progressBar1;
+        private Panel panel1;
+        private Label label1;
     }
 }

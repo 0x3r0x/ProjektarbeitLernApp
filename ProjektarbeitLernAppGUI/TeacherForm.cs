@@ -16,6 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ProjektarbeitLernApp.Model.LearnApp;
 
 namespace ProjektarbeitLernAppGUI
 {
@@ -40,11 +41,45 @@ namespace ProjektarbeitLernAppGUI
 
         private void TeacherForm_Load(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = userService.GetAllStudents();
-            dataGridView1.Columns["Id"].Visible = true;
-            dataGridView1.Columns["Role"].Visible = false;
-            dataGridView1.Columns["Email"].Visible = false;
-            dataGridView1.Columns["Password"].Visible = false;
+            InitializeDataGridView();
+            DataGridViewStyling();
+        }
+
+        private void InitializeDataGridView()
+        {
+            var students = userService.GetAllStudents();
+            if (students.Count == 0)
+            {
+                panel1.Visible = true;
+                return;
+            }
+
+            var studentDataSource = students.Select(student => new Student
+            {
+                Id = student.Id,
+                Ripeness = learnProgressService.GetExamRipeness(student),
+                Name = student.Name,
+                LastName = student.LastName
+            }).ToList();
+
+            studentDataSource.Sort((a, b) => b.Ripeness.CompareTo(a.Ripeness));
+
+            for (int i = 0; i < studentDataSource.Count; i++)
+            {
+                studentDataSource[i].Ranking = i + 1;
+            }
+
+            dataGridView1.DataSource = studentDataSource;
+        }
+
+        private void DataGridViewStyling()
+        {
+            dataGridView1.Columns["Id"].Visible = false;
+            dataGridView1.Columns["Name"].HeaderText = "Vorname";
+            dataGridView1.Columns["LastName"].HeaderText = "Nachname";
+            dataGridView1.Columns["Ripeness"].HeaderText = "Prüfungsreife";
+            dataGridView1.Columns["Ranking"].HeaderText = "Rang";
+
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersVisible = true;
@@ -54,6 +89,7 @@ namespace ProjektarbeitLernAppGUI
             dataGridView1.AllowUserToResizeColumns = false;
             dataGridView1.AllowUserToResizeRows = false;
             dataGridView1.ReadOnly = true;
+            dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[1];
         }
 
         private void InitializeStats(User user)
@@ -125,13 +161,15 @@ namespace ProjektarbeitLernAppGUI
 
         private void DataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            var userId = (int)dataGridView1.CurrentRow.Cells["Id"].Value;
-            if (userId > 0)
+            if (dataGridView1.CurrentRow != null)
             {
-                var user = userService.GetUserById(userId);
-                InitializeStats(user);
+                var userId = (int)dataGridView1.CurrentRow.Cells["Id"].Value;
+                if (userId > 0)
+                {
+                    var user = userService.GetUserById(userId);
+                    InitializeStats(user);
+                }
             }
-
         }
 
     }

@@ -1,4 +1,5 @@
 ﻿using ProjektarbeitLernApp.Model.LearnApp;
+using ProjektarbeitLernApp.PLAContext;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -17,11 +18,13 @@ namespace ProjektarbeitLernApp.Service
         private LearnProgressService learnProgressService;
         private MultipleChoiceSetService multipleChoiceSetService;
         private List<MultipleChoiceSet> multipleChoiceSetList;
+        private DatabasePLAContext dbContext;
 
-        public ExamSimulationService(LearnProgressService learnProgressService, MultipleChoiceSetService multipleChoiceSetService)
+        public ExamSimulationService(DatabasePLAContext dbContext, LearnProgressService learnProgressService, MultipleChoiceSetService multipleChoiceSetService)
         {
             this.learnProgressService = learnProgressService;
             this.multipleChoiceSetService = multipleChoiceSetService;
+            this.dbContext = dbContext;
         }   
 
         public void CreateExamList(int numberOfQuestions)
@@ -37,6 +40,12 @@ namespace ProjektarbeitLernApp.Service
         public void UpdateExamList(List<MultipleChoiceSet> multipleChoiceSetList) 
         {
             this.multipleChoiceSetList = multipleChoiceSetList;
+        }
+
+        public bool SaveExamSimulation(ExamSimulation examSimulation)
+        {
+            dbContext.ExamSimulation.Add(examSimulation);
+            return dbContext.SaveChanges() == 1 ? true : false;
         }
     }
 }

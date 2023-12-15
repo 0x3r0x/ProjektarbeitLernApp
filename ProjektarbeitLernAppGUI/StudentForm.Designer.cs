@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentForm));
             tabControl1 = new TabControl();
             tabPage3 = new TabPage();
-            button2 = new Button();
-            button1 = new Button();
+            btnEvaluateQuestion = new Button();
+            btnNextQuestion = new Button();
             panel1 = new Panel();
             dataGridView2 = new DataGridView();
             lblQuestion = new Label();
@@ -67,11 +67,9 @@
             pieChart1 = new LiveChartsCore.SkiaSharpView.WinForms.PieChart();
             cartesianChart1 = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
             tabPage6 = new TabPage();
-            textBox6 = new TextBox();
-            textBox5 = new TextBox();
-            textBox4 = new TextBox();
-            textBox3 = new TextBox();
-            textBox2 = new TextBox();
+            txtEmail = new TextBox();
+            txtLastName = new TextBox();
+            txtName = new TextBox();
             button6 = new Button();
             pictureBox1 = new PictureBox();
             timer1 = new System.Windows.Forms.Timer(components);
@@ -104,44 +102,44 @@
             tabControl1.Name = "tabControl1";
             tabControl1.Padding = new Point(10, 3);
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1105, 545);
+            tabControl1.Size = new Size(1105, 551);
             tabControl1.TabIndex = 6;
             tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             // 
             // tabPage3
             // 
-            tabPage3.Controls.Add(button2);
-            tabPage3.Controls.Add(button1);
+            tabPage3.Controls.Add(btnEvaluateQuestion);
+            tabPage3.Controls.Add(btnNextQuestion);
             tabPage3.Controls.Add(panel1);
             tabPage3.Location = new Point(4, 52);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(1097, 489);
+            tabPage3.Size = new Size(1097, 495);
             tabPage3.TabIndex = 0;
             tabPage3.Text = "Lernen";
             tabPage3.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnEvaluateQuestion
             // 
-            button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button2.Location = new Point(724, 373);
-            button2.Name = "button2";
-            button2.Size = new Size(179, 116);
-            button2.TabIndex = 3;
-            button2.Text = "Auswerten";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            btnEvaluateQuestion.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnEvaluateQuestion.Location = new Point(724, 373);
+            btnEvaluateQuestion.Name = "btnEvaluateQuestion";
+            btnEvaluateQuestion.Size = new Size(179, 116);
+            btnEvaluateQuestion.TabIndex = 3;
+            btnEvaluateQuestion.Text = "Auswerten";
+            btnEvaluateQuestion.UseVisualStyleBackColor = true;
+            btnEvaluateQuestion.Click += btnEvaluateQuestion_Click;
             // 
-            // button1
+            // btnNextQuestion
             // 
-            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button1.Enabled = false;
-            button1.Location = new Point(912, 373);
-            button1.Name = "button1";
-            button1.Size = new Size(179, 116);
-            button1.TabIndex = 2;
-            button1.Text = "Weiter";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnNextQuestion.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnNextQuestion.Enabled = false;
+            btnNextQuestion.Location = new Point(912, 373);
+            btnNextQuestion.Name = "btnNextQuestion";
+            btnNextQuestion.Size = new Size(179, 116);
+            btnNextQuestion.TabIndex = 2;
+            btnNextQuestion.Text = "Weiter";
+            btnNextQuestion.UseVisualStyleBackColor = true;
+            btnNextQuestion.Click += btnNextQuestion_Click;
             // 
             // panel1
             // 
@@ -161,14 +159,14 @@
             dataGridView2.BackgroundColor = SystemColors.Control;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView2.ColumnHeadersVisible = false;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 14.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView2.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView2.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView2.Location = new Point(0, 70);
             dataGridView2.MultiSelect = false;
             dataGridView2.Name = "dataGridView2";
@@ -199,7 +197,7 @@
             tabPage1.Controls.Add(panel2);
             tabPage1.Location = new Point(4, 52);
             tabPage1.Name = "tabPage1";
-            tabPage1.Size = new Size(1097, 489);
+            tabPage1.Size = new Size(1097, 495);
             tabPage1.TabIndex = 5;
             tabPage1.Text = "Prüfungssimulation";
             tabPage1.UseVisualStyleBackColor = true;
@@ -208,9 +206,9 @@
             // 
             panel4.Controls.Add(label1);
             panel4.Controls.Add(button10);
-            panel4.Location = new Point(3, 3);
+            panel4.Location = new Point(3, 0);
             panel4.Name = "panel4";
-            panel4.Size = new Size(1091, 486);
+            panel4.Size = new Size(1091, 492);
             panel4.TabIndex = 8;
             // 
             // label1
@@ -244,7 +242,7 @@
             // button9
             // 
             button9.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button9.Location = new Point(8, 370);
+            button9.Location = new Point(8, 376);
             button9.Name = "button9";
             button9.Size = new Size(179, 116);
             button9.TabIndex = 7;
@@ -255,8 +253,7 @@
             // button8
             // 
             button8.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button8.Enabled = false;
-            button8.Location = new Point(724, 373);
+            button8.Location = new Point(724, 379);
             button8.Name = "button8";
             button8.Size = new Size(179, 116);
             button8.TabIndex = 6;
@@ -267,7 +264,7 @@
             // button4
             // 
             button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button4.Location = new Point(912, 373);
+            button4.Location = new Point(912, 379);
             button4.Name = "button4";
             button4.Size = new Size(179, 116);
             button4.TabIndex = 5;
@@ -336,7 +333,7 @@
             tabPage4.Controls.Add(dataGridView1);
             tabPage4.Location = new Point(4, 52);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(1097, 489);
+            tabPage4.Size = new Size(1097, 495);
             tabPage4.TabIndex = 1;
             tabPage4.Text = "Routinen";
             tabPage4.UseVisualStyleBackColor = true;
@@ -354,7 +351,7 @@
             // button5
             // 
             button5.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button5.Location = new Point(950, 2);
+            button5.Location = new Point(950, -56);
             button5.Name = "button5";
             button5.Size = new Size(141, 23);
             button5.TabIndex = 5;
@@ -405,7 +402,7 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(321, 3);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(623, 487);
+            dataGridView1.Size = new Size(623, 429);
             dataGridView1.TabIndex = 0;
             // 
             // tabPage5
@@ -417,7 +414,7 @@
             tabPage5.Controls.Add(cartesianChart1);
             tabPage5.Location = new Point(4, 52);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(1097, 489);
+            tabPage5.Size = new Size(1097, 495);
             tabPage5.TabIndex = 2;
             tabPage5.Text = "Statistiken";
             tabPage5.UseVisualStyleBackColor = true;
@@ -483,76 +480,56 @@
             // 
             // tabPage6
             // 
-            tabPage6.Controls.Add(textBox6);
-            tabPage6.Controls.Add(textBox5);
-            tabPage6.Controls.Add(textBox4);
-            tabPage6.Controls.Add(textBox3);
-            tabPage6.Controls.Add(textBox2);
+            tabPage6.Controls.Add(txtEmail);
+            tabPage6.Controls.Add(txtLastName);
+            tabPage6.Controls.Add(txtName);
             tabPage6.Controls.Add(button6);
             tabPage6.Location = new Point(4, 52);
             tabPage6.Name = "tabPage6";
-            tabPage6.Size = new Size(1097, 489);
+            tabPage6.Size = new Size(1097, 495);
             tabPage6.TabIndex = 3;
             tabPage6.Text = "Mein Profil";
             tabPage6.UseVisualStyleBackColor = true;
             // 
-            // textBox6
+            // txtEmail
             // 
-            textBox6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            textBox6.Location = new Point(8, 119);
-            textBox6.Name = "textBox6";
-            textBox6.PlaceholderText = "Passwort wiederholen";
-            textBox6.Size = new Size(1083, 23);
-            textBox6.TabIndex = 11;
+            txtEmail.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtEmail.Location = new Point(8, 61);
+            txtEmail.Name = "txtEmail";
+            txtEmail.PlaceholderText = "E-Mail";
+            txtEmail.Size = new Size(1083, 23);
+            txtEmail.TabIndex = 10;
             // 
-            // textBox5
+            // txtLastName
             // 
-            textBox5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            textBox5.Location = new Point(8, 61);
-            textBox5.Name = "textBox5";
-            textBox5.PlaceholderText = "E-Mail";
-            textBox5.Size = new Size(1083, 23);
-            textBox5.TabIndex = 10;
+            txtLastName.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtLastName.Enabled = false;
+            txtLastName.Location = new Point(8, 32);
+            txtLastName.Name = "txtLastName";
+            txtLastName.PlaceholderText = "Nachname";
+            txtLastName.Size = new Size(1083, 23);
+            txtLastName.TabIndex = 8;
             // 
-            // textBox4
+            // txtName
             // 
-            textBox4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            textBox4.Location = new Point(8, 90);
-            textBox4.Name = "textBox4";
-            textBox4.PlaceholderText = "Passwort";
-            textBox4.Size = new Size(1083, 23);
-            textBox4.TabIndex = 9;
-            // 
-            // textBox3
-            // 
-            textBox3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            textBox3.Enabled = false;
-            textBox3.Location = new Point(8, 32);
-            textBox3.Name = "textBox3";
-            textBox3.PlaceholderText = "Nachname";
-            textBox3.Size = new Size(1083, 23);
-            textBox3.TabIndex = 8;
-            // 
-            // textBox2
-            // 
-            textBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            textBox2.Enabled = false;
-            textBox2.Location = new Point(8, 3);
-            textBox2.Name = "textBox2";
-            textBox2.PlaceholderText = "Vorname";
-            textBox2.Size = new Size(1083, 23);
-            textBox2.TabIndex = 7;
+            txtName.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtName.Enabled = false;
+            txtName.Location = new Point(8, 3);
+            txtName.Name = "txtName";
+            txtName.PlaceholderText = "Vorname";
+            txtName.Size = new Size(1083, 23);
+            txtName.TabIndex = 7;
             // 
             // button6
             // 
             button6.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button6.Enabled = false;
-            button6.Location = new Point(912, 367);
+            button6.Location = new Point(912, 309);
             button6.Name = "button6";
             button6.Size = new Size(179, 116);
             button6.TabIndex = 6;
             button6.Text = "Speichern";
             button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
             // pictureBox1
             // 
@@ -609,8 +586,8 @@
         private TabPage tabPage6;
         private Panel panel1;
         private Label lblQuestion;
-        private Button button2;
-        private Button button1;
+        private Button btnEvaluateQuestion;
+        private Button btnNextQuestion;
         private TabPage tabPage1;
         private Button button4;
         private Panel panel2;
@@ -625,11 +602,9 @@
         private Label label3;
         private ProgressBar progressBar1;
         private Button button6;
-        private TextBox textBox6;
-        private TextBox textBox5;
-        private TextBox textBox4;
-        private TextBox textBox3;
-        private TextBox textBox2;
+        private TextBox txtEmail;
+        private TextBox txtLastName;
+        private TextBox txtName;
         private CheckBox checkBox9;
         private PictureBox pictureBox1;
         private DataGridView dataGridView2;

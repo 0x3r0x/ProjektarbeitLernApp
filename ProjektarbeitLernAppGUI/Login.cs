@@ -25,6 +25,14 @@ namespace ProjektarbeitLernAppGUI
             userService = new UserService(dbContext);
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
+
+            var (username, password) = LoadLoginData();
+            if (username != null && password != null)
+            {
+                txtEmail.Text = username;
+                txtPassword.Text = password;
+                checkBox1.Checked = true;
+            }
         }
 
         private void btnShowRegister_Click(object sender, EventArgs e)
@@ -33,14 +41,36 @@ namespace ProjektarbeitLernAppGUI
             registerForm.Show();
             this.Hide();
         }
+        private (string, string) LoadLoginData()
+        {
+            string filePath = "login.txt";
+            if (File.Exists(filePath))
+            {
+                string[] data = File.ReadAllText(filePath).Split(',');
+                if (data.Length == 2)
+                {
+                    return (data[0], data[1]);
+                }
+            }
+            return (null, null);
+        }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void SaveLoginData(string username, string password)
+        {
+            string filePath = "login.txt";
+            File.WriteAllText(filePath, $"{username},{password}");
+        }
+
+        private async void btnLogin_Click(object sender, EventArgs e)
         {
             var user = new User();
             user.Email = txtEmail.Text;
             user.Password = txtPassword.Text;
 
-            var isValigLogin = userService.Login(user);
+            if(checkBox1.Checked)
+                SaveLoginData(user.Email, user.Password);
+
+            var isValigLogin = await userService.LoginAsync(user);
             if (isValigLogin)
             {
                 user.Id = userService.GetUserId(user);
@@ -55,6 +85,10 @@ namespace ProjektarbeitLernAppGUI
                     mainForm.Show();
                     this.Hide();
                 }
+            }
+            else
+            {
+                MessageBox.Show("Falsche Logindaten");
             }
         }
 

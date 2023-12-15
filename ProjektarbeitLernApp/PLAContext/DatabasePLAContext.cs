@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using ProjektarbeitLernApp.Model.Auth;
 using ProjektarbeitLernApp.Model.LearnApp;
 using System;
@@ -19,8 +20,15 @@ namespace ProjektarbeitLernApp.PLAContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("Server=localhost;Database=projektlernapp;User=root;Password=;",
-                                    new MariaDbServerVersion(new Version(10, 4, 28)));
+            var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+            IConfigurationRoot configuration = builder.Build();
+
+            var connectionString = configuration.GetConnectionString("Database");
+
+            optionsBuilder.UseMySql(connectionString, new MariaDbServerVersion(new Version(10, 4, 28)));
         }
 
     }

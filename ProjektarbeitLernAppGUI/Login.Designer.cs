@@ -34,6 +34,7 @@
             txtEmail = new TextBox();
             btnLogin = new Button();
             btnShowRegister = new Button();
+            checkBox1 = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -55,7 +56,6 @@
             txtPassword.PlaceholderText = "Passwort";
             txtPassword.Size = new Size(228, 23);
             txtPassword.TabIndex = 4;
-            txtPassword.Text = "12345678";
             // 
             // txtEmail
             // 
@@ -64,11 +64,10 @@
             txtEmail.PlaceholderText = "E-Mail";
             txtEmail.Size = new Size(228, 23);
             txtEmail.TabIndex = 3;
-            txtEmail.Text = "mail@huelsmann-andreas.de";
             // 
             // btnLogin
             // 
-            btnLogin.Location = new Point(12, 304);
+            btnLogin.Location = new Point(12, 327);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(228, 23);
             btnLogin.TabIndex = 1;
@@ -78,7 +77,7 @@
             // 
             // btnShowRegister
             // 
-            btnShowRegister.Location = new Point(12, 333);
+            btnShowRegister.Location = new Point(12, 356);
             btnShowRegister.Name = "btnShowRegister";
             btnShowRegister.Size = new Size(228, 23);
             btnShowRegister.TabIndex = 2;
@@ -86,11 +85,21 @@
             btnShowRegister.UseVisualStyleBackColor = true;
             btnShowRegister.Click += btnShowRegister_Click;
             // 
+            // checkBox1
+            // 
+            checkBox1.Location = new Point(12, 302);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(231, 24);
+            checkBox1.TabIndex = 9;
+            checkBox1.Text = "Anmeldedaten speichern";
+            checkBox1.UseVisualStyleBackColor = true;
+            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(255, 362);
+            ClientSize = new Size(255, 383);
+            Controls.Add(checkBox1);
             Controls.Add(btnShowRegister);
             Controls.Add(btnLogin);
             Controls.Add(txtEmail);
@@ -111,5 +120,6 @@
         private TextBox txtEmail;
         private Button btnLogin;
         private Button btnShowRegister;
+        private CheckBox checkBox1;
     }
 }

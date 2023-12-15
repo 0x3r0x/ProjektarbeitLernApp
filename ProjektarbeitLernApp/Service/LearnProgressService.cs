@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace ProjektarbeitLernApp.Service
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class LearnProgressService
     {
         private DatabasePLAContext dbContext;
@@ -44,7 +47,6 @@ namespace ProjektarbeitLernApp.Service
                 dbContext.SaveChanges();
             }
         }
-
         private void CheckIfAllWasShown(int studentId)
         {
             var dbLearnProgress = dbContext.LearnProgress.Where(e => e.Student_Id.Equals(studentId)).ToList();
@@ -112,18 +114,24 @@ namespace ProjektarbeitLernApp.Service
 
         public int GetExamRipeness(User user)
         {
-            int totalEntries = dbContext.LearnProgress.Count(e => e.Student_Id.Equals(user.Id));
-            int stageSixEntries = dbContext.LearnProgress.Count(e => e.Student_Id.Equals(user.Id) && e.Stage == 6);
+            var learnProgressEntries = dbContext.LearnProgress.Where(e => e.Student_Id.Equals(user.Id)).ToList();
 
-            if (totalEntries == 0)
-            {
+            if (!learnProgressEntries.Any())
                 return 0;
+
+            double weightedSum = 0;
+            int totalWeight = 0;
+
+            foreach (var entry in learnProgressEntries)
+            {
+                weightedSum += entry.Stage;
+                totalWeight += 6; 
             }
 
-            double ripenessPercentage = (double)stageSixEntries / totalEntries * 100;
+            double ripenessPercentage = (weightedSum / totalWeight) * 100;
 
             return (int)ripenessPercentage;
-
         }
+
     }
 }

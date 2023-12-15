@@ -10,6 +10,7 @@
 - **Lernmodi:**
   - Routinen-basiertes Lernen
   - Freies Lernen
+  - Prüfungssimulation
 - **Lehrer-Interface:** Überwachung und Auswertung des Lernfortschritts der Schüler
 
 ## 3. Technische Spezifikationen
@@ -18,7 +19,6 @@
 - **Entwicklungsumgebung:** Visual Studio
 - **Datenbank:** MySQL zur Speicherung von Nutzerdaten und Lerninhalten
 - **Authentifizierung:** Sicheres Login-System
-- **Weitere Tools:** Prüfungssimulationen
 
 ## 4. Zeitplan und Phasen
 ### Analysephase (Gesamtzeit: 1 Stunde)
@@ -55,8 +55,8 @@
 **Gesamtzeit des Projektes:** 80 Stunden
 
 ## 5. Projektressourcen
-- **Software:** C# in Visual Studio, MySQL, GitHub
-- **Hardware:** Server mit XAMPP, Beamer und Notebook für Präsentationen
+- **Software:** Visual Studio, MySQL, GitHub
+- **Hardware:** Server mit XAMPP, Notebook für Präsentationen
 - **Personal:** Entwicklerteam
 
 ## 6. Projektumfeld

@@ -28,6 +28,7 @@ namespace ProjektarbeitLernAppGUI
         private StatisticService statisticService;
         private LearnProgressService learnProgressService;
         private RoutineService routineService;
+        private UserService userService;
         private User user;
         private List<Answers> answerList;
         private List<Answers> examAnswerList;
@@ -51,24 +52,20 @@ namespace ProjektarbeitLernAppGUI
             this.user = user;
 
             InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterScreen;
-            button1.Enabled = false;
-
-
-            #region profile
-            var userService = new UserService(dbContext);
-            var dbUser = userService.GetUserById(user.Id);
-            textBox2.Text = dbUser.Name;
-            textBox3.Text = dbUser.LastName;
-            textBox5.Text = dbUser.Email;
-            #endregion
-
-            #region stats
+            InitializeProfile();
             InitializeStats();
 
-            #endregion
+            this.StartPosition = FormStartPosition.CenterScreen;
+            btnNextQuestion.Enabled = false;
+        }
 
-
+        private void InitializeProfile()
+        {
+            userService = new UserService(dbContext);
+            var dbUser = userService.GetUserById(user.Id);
+            txtName.Text = dbUser.Name;
+            txtLastName.Text = dbUser.LastName;
+            txtEmail.Text = dbUser.Email;
         }
 
         private void InitializeStats()
@@ -213,11 +210,11 @@ namespace ProjektarbeitLernAppGUI
             dataGridView2.Refresh();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnEvaluateQuestion_Click(object sender, EventArgs e)
         {
             var validateAnswer = learnProgressService.ValidateAnswer(answerList);
-            button1.Enabled = true;
-            button2.Enabled = false;
+            btnNextQuestion.Enabled = true;
+            btnEvaluateQuestion.Enabled = false;
 
             var learnProgress = new LearnProgress()
             {
@@ -235,14 +232,11 @@ namespace ProjektarbeitLernAppGUI
 
             learnProgressService.UpdateLearnProgress(learnProgress, statistic);
 
-            ValidateExamGridView(dataGridView2);
+            ValidateGridView(dataGridView2);
 
-            //foreach (DataGridViewRow row in dataGridView2.Rows)
-            //{
-            //}
         }
 
-        private bool ValidateExamGridView(DataGridView dataGridView)
+        private bool ValidateGridView(DataGridView dataGridView)
         {
             var isValid = true;
 
@@ -280,11 +274,11 @@ namespace ProjektarbeitLernAppGUI
         }
 
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnNextQuestion_Click(object sender, EventArgs e)
         {
             GetNewQuestion();
-            button1.Enabled = false;
-            button2.Enabled = true;
+            btnNextQuestion.Enabled = false;
+            btnEvaluateQuestion.Enabled = true;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -308,12 +302,10 @@ namespace ProjektarbeitLernAppGUI
             panel4.Visible = true;
             label4.Text = "00:30:00";
             button9.Enabled = true;
-            button8.Enabled = false;
-            button4.Enabled = true;
             examTime = TimeSpan.FromMinutes(1);
 
             examList = new List<MultipleChoiceSet>();
-            examService = new ExamSimulationService(learnProgressService, multipleChoiceSetService);
+            examService = new ExamSimulationService(dbContext, learnProgressService, multipleChoiceSetService);
 
             examService.CreateExamList(15);
             examList = examService.GetExamList();
@@ -337,7 +329,7 @@ namespace ProjektarbeitLernAppGUI
                 tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
                 tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
 
-                TabPage tabPage = new TabPage(i++.ToString()); // set.Id.ToString()
+                TabPage tabPage = new TabPage(i++.ToString()); 
 
                 Label label = new Label();
                 label.Text = multipleChoiceSetService.GetSpecificQuestion(set.Id).Question;
@@ -355,8 +347,6 @@ namespace ProjektarbeitLernAppGUI
 
                 tabPage.Controls.Add(tableLayoutPanel);
                 tabControl2.TabPages.Add(tabPage);
-
-                //datagirdviewstyling
 
                 int rowHeight = dataGridView.Height / dataGridView.Rows.Count;
 
@@ -450,7 +440,6 @@ namespace ProjektarbeitLernAppGUI
                 {
                     answer.GivenAnswer = isChecked;
                     multipleChoiceSet.Answers = JsonSerializer.Serialize(answers);
-                    //examService.UpdateExamList(examList);
                 }
             }
         }
@@ -492,27 +481,13 @@ namespace ProjektarbeitLernAppGUI
         private void button4_Click(object sender, EventArgs e)
         {
             if (tabControl2.SelectedIndex < tabControl2.TabCount - 1)
-            {
                 tabControl2.SelectedIndex++;
-                button8.Enabled = true;
-                if (tabControl2.SelectedIndex == tabControl2.TabCount - 1)
-                {
-                    button4.Enabled = false;
-                }
-            }
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             if (tabControl2.SelectedIndex > 0)
-            {
                 tabControl2.SelectedIndex--;
-                button4.Enabled = true;
-                if (tabControl2.SelectedIndex == 0)
-                {
-                    button8.Enabled = false;
-                }
-            }
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -522,6 +497,10 @@ namespace ProjektarbeitLernAppGUI
 
         private void ValidateExam()
         {
+            List<MultipleChoiceSet> multipleChoiceSetList = new List<MultipleChoiceSet>();
+
+            var correctAnswers = 0;
+            var totalAnswers = 0;
             foreach (TabPage tabPage in tabControl2.TabPages)
             {
                 foreach (Control container in tabPage.Controls)
@@ -530,21 +509,40 @@ namespace ProjektarbeitLernAppGUI
                     {
                         if (control is DataGridView dataGridView)
                         {
-                            bool isValid = ValidateExamGridView(dataGridView);
+                            var multipleChoiceSet = multipleChoiceSetService.GetSpecificQuestion((int)control.Tag);
+                            multipleChoiceSet.Answers = JsonSerializer.Serialize(dataGridView.DataSource as List<Answers>);
+                            multipleChoiceSetList.Add(multipleChoiceSet);
+
+                            bool isValid = ValidateGridView(dataGridView);
                             if (!tabPageValidationResults.ContainsKey(tabPage))
                                 tabPageValidationResults.Add(tabPage, isValid);
                             else
                                 tabPageValidationResults[tabPage] = isValid;
 
+                            if (isValid)
+                                correctAnswers++;
+                            totalAnswers++;
                             control.Enabled = false;
                         }
                     }
                 }
             }
 
+            var hasPassed = false;
+            if (totalAnswers / 2 < correctAnswers)
+                hasPassed = true;
+
+
+            examService.SaveExamSimulation(new ExamSimulation()
+            {
+                MultipleChoiceList = JsonSerializer.Serialize(multipleChoiceSetList),
+                HasPassed = hasPassed,
+                Sutdent_Id = user.Id
+            });
+
             button9.Enabled = false;
             timer1.Stop();
-            label4.Text = "Zeit ist um!";
+            label4.Text = "Zeit ist um! Du hast " + (hasPassed ? "bestanden!" : "nicht bestanden!");
             progressBar2.Value = 0;
             isValidationPerformed = true;
             tabControl2.Invalidate();
@@ -559,16 +557,18 @@ namespace ProjektarbeitLernAppGUI
         private void timer1_Tick(object sender, EventArgs e)
         {
             examTime = examTime.Subtract(TimeSpan.FromSeconds(1));
-
             label4.Text = examTime.ToString("hh\\:mm\\:ss");
-
             progressBar2.Value = (int)examTime.TotalSeconds;
 
             if (examTime.TotalSeconds <= 0)
-            {
                 ValidateExam();
-            }
         }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            user.Email = txtEmail.Text;
+            user = userService.EditMail(user);
+            MessageBox.Show("E-Mail erfolgreich geändert.");
+        }
     }
 }

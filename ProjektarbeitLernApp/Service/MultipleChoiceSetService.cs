@@ -29,7 +29,7 @@ namespace ProjektarbeitLernApp.Service
 
         public MultipleChoiceSet GetSpecificQuestion(int id)
         {
-            return dbContext.MultipleChoiceSet.FirstOrDefault(e => e.Id.Equals(id));
+            return dbContext.MultipleChoiceSet.AsNoTracking().FirstOrDefault(e => e.Id.Equals(id));
         }
 
         public List<MultipleChoiceSet> GetAllQuestions()
