@@ -13,11 +13,19 @@ using System.Windows.Forms;
 
 namespace ProjektarbeitLernAppGUI
 {
+    /// <summary>
+    /// Diese Klasse repräsentiert das Login-Fenster der Anwendung.
+    /// Benutzer können sich hier anmelden und ihre Anmeldeinformationen speichern.
+    /// </summary>
     public partial class Login : Form
     {
         private UserService userService;
         private DatabasePLAContext dbContext;
 
+        /// <summary>
+        /// Initialisiert eine neue Instanz des Login-Fensters.
+        /// </summary>
+        /// <param name="dbContext">Die Datenbankkontext-Instanz.</param>
         public Login(DatabasePLAContext dbContext)
         {
             this.dbContext = dbContext;
@@ -35,12 +43,20 @@ namespace ProjektarbeitLernAppGUI
             }
         }
 
+        /// <summary>
+        /// Zeigt das Registrierungsformular an und blendet das Login-Fenster aus.
+        /// </summary>
         private void btnShowRegister_Click(object sender, EventArgs e)
         {
             var registerForm = new Register(dbContext);
             registerForm.Show();
             this.Hide();
         }
+
+        /// <summary>
+        /// Lädt zuvor gespeicherte Anmeldeinformationen aus der Datei "login.txt".
+        /// </summary>
+        /// <returns>Ein Tupel mit dem Benutzernamen und dem Passwort oder null, wenn keine gespeicherten Informationen vorhanden sind.</returns>
         private (string, string) LoadLoginData()
         {
             string filePath = "login.txt";
@@ -55,12 +71,23 @@ namespace ProjektarbeitLernAppGUI
             return (null, null);
         }
 
+        /// <summary>
+        /// Speichert die übergebenen Anmeldeinformationen (Benutzernamen und Passwort) in der Datei "login.txt".
+        /// </summary>
+        /// <param name="username">Der Benutzername, der gespeichert werden soll.</param>
+        /// <param name="password">Das Passwort, das gespeichert werden soll.</param>
+
         private void SaveLoginData(string username, string password)
         {
             string filePath = "login.txt";
             File.WriteAllText(filePath, $"{username},{password}");
         }
 
+        /// <summary>
+        /// Behandelt den Anmeldevorgang, überprüft die Anmeldeinformationen und zeigt das entsprechende Hauptformular an.
+        /// </summary>
+        /// <param name="sender">Das auslösende Steuerelement.</param>
+        /// <param name="e">Die Ereignisargumente.</param>
         private async void btnLogin_Click(object sender, EventArgs e)
         {
             var user = new User();

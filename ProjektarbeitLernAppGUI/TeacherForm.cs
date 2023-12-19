@@ -20,6 +20,10 @@ using ProjektarbeitLernApp.Model.LearnApp;
 
 namespace ProjektarbeitLernAppGUI
 {
+    /// <summary>
+    /// Diese Klasse repräsentiert das Hauptfenster für Lehrer in der Anwendung.
+    /// Sie ermöglicht Lehrern, Schülerdaten anzuzeigen und Statistiken anzuzeigen.
+    /// </summary>
     public partial class TeacherForm : Form
     {
         private DatabasePLAContext dbContext;
@@ -28,6 +32,11 @@ namespace ProjektarbeitLernAppGUI
         private StatisticService statisticService;
         private LearnProgressService learnProgressService;
 
+        /// <summary>
+        /// Konstruktor für die TeacherForm-Klasse. Initialisiert das Formular und seine Abhängigkeiten.
+        /// </summary>
+        /// <param name="dbContext">Der Datenbankkontext für die Datenbankzugriffe.</param>
+        /// <param name="user">Der aktuelle Benutzer, der das Formular verwendet.</param>
         public TeacherForm(DatabasePLAContext dbContext, User user)
         {
             this.dbContext = dbContext;
@@ -39,12 +48,18 @@ namespace ProjektarbeitLernAppGUI
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Ereignishandler für das Laden des TeacherForm-Formulars. Initialisiert die DataGridView und das Styling.
+        /// </summary>
         private void TeacherForm_Load(object sender, EventArgs e)
         {
             InitializeDataGridView();
             DataGridViewStyling();
         }
 
+        /// <summary>
+        /// Initialisiert die DataGridView mit Daten zu den Schülern und deren Prüfungsreife.
+        /// </summary>
         private void InitializeDataGridView()
         {
             var students = userService.GetAllStudents();
@@ -72,6 +87,9 @@ namespace ProjektarbeitLernAppGUI
             dataGridView1.DataSource = studentDataSource;
         }
 
+        /// <summary>
+        /// Führt das Styling für die DataGridView durch.
+        /// </summary>
         private void DataGridViewStyling()
         {
             dataGridView1.Columns["Id"].Visible = false;
@@ -91,6 +109,11 @@ namespace ProjektarbeitLernAppGUI
             dataGridView1.ReadOnly = true;
             dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[1];
         }
+
+        /// <summary>
+        /// Initialisiert Statistiken für den ausgewählten Schüler und aktualisiert die Diagramme und den Fortschrittsbalken.
+        /// </summary>
+        /// <param name="user">Der ausgewählte Schüler, für den die Statistiken angezeigt werden sollen.</param>
 
         private void InitializeStats(User user)
         {
@@ -159,6 +182,9 @@ namespace ProjektarbeitLernAppGUI
             progressBar1.Value = learnProgressService.GetExamRipeness(user);
         }
 
+        /// <summary>
+        /// Ereignishandler für die Änderung der Auswahl in der DataGridView. Aktualisiert die Statistiken für den ausgewählten Schüler.
+        /// </summary>
         private void DataGridView_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView1.CurrentRow != null)

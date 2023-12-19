@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentForm));
             tabControl1 = new TabControl();
             tabPage3 = new TabPage();
@@ -102,7 +102,7 @@
             tabControl1.Name = "tabControl1";
             tabControl1.Padding = new Point(10, 3);
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1105, 551);
+            tabControl1.Size = new Size(1105, 546);
             tabControl1.TabIndex = 6;
             tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             // 
@@ -159,14 +159,14 @@
             dataGridView2.BackgroundColor = SystemColors.Control;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView2.ColumnHeadersVisible = false;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dataGridView2.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 14.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView2.DefaultCellStyle = dataGridViewCellStyle1;
             dataGridView2.Location = new Point(0, 70);
             dataGridView2.MultiSelect = false;
             dataGridView2.Name = "dataGridView2";
@@ -333,7 +333,7 @@
             tabPage4.Controls.Add(dataGridView1);
             tabPage4.Location = new Point(4, 52);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(1097, 495);
+            tabPage4.Size = new Size(1097, 490);
             tabPage4.TabIndex = 1;
             tabPage4.Text = "Routinen";
             tabPage4.UseVisualStyleBackColor = true;
@@ -350,8 +350,8 @@
             // 
             // button5
             // 
-            button5.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button5.Location = new Point(950, -56);
+            button5.Anchor = AnchorStyles.None;
+            button5.Location = new Point(950, 8);
             button5.Name = "button5";
             button5.Size = new Size(141, 23);
             button5.TabIndex = 5;
@@ -402,7 +402,7 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(321, 3);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(623, 429);
+            dataGridView1.Size = new Size(623, 424);
             dataGridView1.TabIndex = 0;
             // 
             // tabPage5
@@ -414,7 +414,7 @@
             tabPage5.Controls.Add(cartesianChart1);
             tabPage5.Location = new Point(4, 52);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(1097, 495);
+            tabPage5.Size = new Size(1097, 490);
             tabPage5.TabIndex = 2;
             tabPage5.Text = "Statistiken";
             tabPage5.UseVisualStyleBackColor = true;
@@ -550,7 +550,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1107, 560);
+            ClientSize = new Size(1107, 555);
             Controls.Add(pictureBox1);
             Controls.Add(tabControl1);
             Icon = (Icon)resources.GetObject("$this.Icon");

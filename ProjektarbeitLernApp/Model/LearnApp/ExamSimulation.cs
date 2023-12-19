@@ -11,7 +11,7 @@ namespace ProjektarbeitLernApp.Model.LearnApp
     {
         [Key]
         public int Id { get; set; }
-        public int Sutdent_Id { get; set; }
+        public int User_Id { get; set; }
         public string MultipleChoiceList { get; set; }
         public bool HasPassed { get; set; }
     }

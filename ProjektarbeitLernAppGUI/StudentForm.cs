@@ -21,6 +21,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProjektarbeitLernAppGUI
 {
+    /// <summary>
+    /// Das Hauptformular für Studierende, das verschiedene Funktionen wie das Lernen, die Prüfungsvorbereitung und die Statistikverwaltung bereitstellt.
+    /// </summary>
     public partial class StudentForm : Form
     {
         private DatabasePLAContext dbContext;
@@ -41,6 +44,14 @@ namespace ProjektarbeitLernAppGUI
 
         private bool isValidationPerformed;
 
+        /// <summary>
+        /// Dieser Konstruktor initialisiert eine Instanz des StudentForm-Formulars.
+        /// Er nimmt eine Instanz von DatabasePLAContext und einen Benutzer (User) als Parameter entgegen.
+        /// Die Methode initialisiert verschiedene Dienste und Daten für das Formular, setzt die Position des Formulars,
+        /// und deaktiviert vorübergehend die Schaltfläche "Nächste Frage", bis eine Frage geladen wurde.
+        /// </summary>
+        /// <param name="dbContext">Die Datenbankkontextinstanz (DatabasePLAContext).</param>
+        /// <param name="user">Der Benutzer (User), der sich im Formular anmeldet.</param>
         public StudentForm(DatabasePLAContext dbContext, User user)
         {
             this.dbContext = dbContext;
@@ -59,6 +70,9 @@ namespace ProjektarbeitLernAppGUI
             btnNextQuestion.Enabled = false;
         }
 
+        /// <summary>
+        /// Initialisiert das Benutzerprofil mit persönlichen Daten.
+        /// </summary>
         private void InitializeProfile()
         {
             userService = new UserService(dbContext);
@@ -68,6 +82,9 @@ namespace ProjektarbeitLernAppGUI
             txtEmail.Text = dbUser.Email;
         }
 
+        /// <summary>
+        /// Initialisiert die statistischen Grafiken und Fortschrittsanzeigen für den Benutzer.
+        /// </summary>
         private void InitializeStats()
         {
             var allKnown = statisticService.GetAllKnown(user);
@@ -140,12 +157,24 @@ namespace ProjektarbeitLernAppGUI
             progressBar1.Value = learnProgressService.GetExamRipeness(user);
         }
 
+        /// <summary>
+        /// Diese Methode wird beim Laden des Formulars ausgeführt und initialisiert die Anzeige.
+        /// Sie ruft die Methode GetNewQuestion auf, um eine neue Frage zu laden, und die Methode GetRoutines, um Routinedaten abzurufen und im DataGridView anzuzeigen.
+        /// </summary>
+        /// <param name="sender">Das auslösende Objekt.</param>
+        /// <param name="e">Das Ereignisargument.</param>
         private void Form1_Load(object sender, EventArgs e)
         {
             GetNewQuestion();
             GetRoutines();
         }
 
+        /// <summary>
+        /// Diese Methode lädt Routinedaten und zeigt sie im DataGridView-Steuerelement an.
+        /// Sie ruft die Methode routineService.GetAll() auf, um Routinedaten abzurufen und im DataGridView anzuzeigen.
+        /// Anschließend werden die sichtbaren Spalten und deren Anzeigereihenfolge konfiguriert.
+        /// Die Methode passt die Spaltenbreite für die "Name"-Spalte an und blendet den Zeilenheader aus.
+        /// </summary>
         private void GetRoutines()
         {
             dataGridView1.DataSource = routineService.GetAll();
@@ -168,6 +197,9 @@ namespace ProjektarbeitLernAppGUI
 
         }
 
+        /// <summary>
+        /// Lädt eine neue Frage für den Benutzer und bereitet die Antwortmöglichkeiten vor.
+        /// </summary>
         private void GetNewQuestion()
         {
             var newId = learnProgressService.GetNextMultipleChoiceSetIDToLearn(user);
@@ -210,6 +242,13 @@ namespace ProjektarbeitLernAppGUI
             dataGridView2.Refresh();
         }
 
+        /// <summary>
+        /// Diese Methode wird aufgerufen, wenn die Schaltfläche "Frage bewerten" geklickt wird.
+        /// Sie validiert die gegebenen Antworten und aktualisiert den Lernfortschritt und die Statistik des Benutzers.
+        /// Nach der Validierung wird die Schaltfläche "Nächste Frage" aktiviert.
+        /// </summary>
+        /// <param name="sender">Das auslösende Objekt.</param>
+        /// <param name="e">Das Event-Argument.</param>
         private void btnEvaluateQuestion_Click(object sender, EventArgs e)
         {
             var validateAnswer = learnProgressService.ValidateAnswer(answerList);
@@ -219,12 +258,12 @@ namespace ProjektarbeitLernAppGUI
             var learnProgress = new LearnProgress()
             {
                 MultipleChoiceSet_Id = question.Id,
-                Student_Id = user.Id,
+                User_Id = user.Id,
             };
 
             var statistic = new Statistic()
             {
-                Student_Id = user.Id,
+                User_Id = user.Id,
                 MultipleChoiceSet_Id = question.Id,
                 DateTime = DateTime.Now,
                 WasKnown = validateAnswer
@@ -236,6 +275,13 @@ namespace ProjektarbeitLernAppGUI
 
         }
 
+        /// <summary>
+        /// Diese Methode validiert die Antworten in einer DataGridView.
+        /// Sie vergleicht die gegebenen Antworten mit den richtigen Antworten und markiert die Zeilen entsprechend.
+        /// Wenn mindestens eine falsche Antwort gegeben wurde, wird 'isValid' auf 'false' gesetzt.
+        /// </summary>
+        /// <param name="dataGridView">Die DataGridView, die die Antworten enthält.</param>
+        /// <returns>'true', wenn alle Antworten korrekt sind, andernfalls 'false'.</returns>
         private bool ValidateGridView(DataGridView dataGridView)
         {
             var isValid = true;
@@ -273,7 +319,14 @@ namespace ProjektarbeitLernAppGUI
             return isValid;
         }
 
-
+        /// <summary>
+        /// Diese Methode wird aufgerufen, wenn die Schaltfläche "Nächste Frage" geklickt wird.
+        /// Sie ruft die Methode "GetNewQuestion" auf, um eine neue Frage zu erhalten.
+        /// Nachdem eine neue Frage geladen wurde, wird die Schaltfläche "Nächste Frage" deaktiviert
+        /// und die Schaltfläche "Frage bewerten" aktiviert.
+        /// </summary>
+        /// <param name="sender">Das auslösende Objekt.</param>
+        /// <param name="e">Das Event-Argument.</param>
         private void btnNextQuestion_Click(object sender, EventArgs e)
         {
             GetNewQuestion();
@@ -281,6 +334,14 @@ namespace ProjektarbeitLernAppGUI
             btnEvaluateQuestion.Enabled = true;
         }
 
+        /// <summary>
+        /// Diese Methode wird aufgerufen, wenn die Schaltfläche "Erstellen" (button3) geklickt wird.
+        /// Sie erstellt eine Routine mit dem angegebenen Namen und Datum/Uhrzeit-Kombination
+        /// aus den Werten der DateTimePicker-Elemente.
+        /// Nach dem Erstellen der Routine wird die Methode "GetRoutines" aufgerufen, um die Daten in der DataGridView zu aktualisieren.
+        /// </summary>
+        /// <param name="sender">Das auslösende Objekt.</param>
+        /// <param name="e">Das Event-Argument.</param>
         private void button3_Click(object sender, EventArgs e)
         {
             DateTime datePart = dateTimePicker1.Value.Date;
@@ -291,21 +352,32 @@ namespace ProjektarbeitLernAppGUI
             GetRoutines();
         }
 
+        /// <summary>
+        /// Diese Methode wird aufgerufen, wenn die Schaltfläche "Alle löschen" (button7) geklickt wird.
+        /// Sie löscht alle vorhandenen Routinen mithilfe des RoutineService.
+        /// Nach dem Löschen der Routinen wird die Methode "GetRoutines" aufgerufen, um die DataGridView zu aktualisieren.
+        /// </summary>
+        /// <param name="sender">Das auslösende Objekt.</param>
+        /// <param name="e">Das Event-Argument.</param>
         private void button7_Click(object sender, EventArgs e)
         {
             routineService.DeleteAll();
             GetRoutines();
         }
 
+        /// <summary>
+        /// Diese Methode initialisiert die Prüfungssimulation. Sie richtet die Benutzeroberfläche ein, erstellt eine Liste von Prüfungsfragen
+        /// und füllt die Registerkarten im TabControl mit den Fragen und Antwortmöglichkeiten.
+        /// </summary>
         private void InitializeExamSimulation()
         {
             panel4.Visible = true;
             label4.Text = "00:30:00";
             button9.Enabled = true;
-            examTime = TimeSpan.FromMinutes(1);
+            examTime = TimeSpan.FromMinutes(30);
 
             examList = new List<MultipleChoiceSet>();
-            examService = new ExamSimulationService(dbContext, learnProgressService, multipleChoiceSetService);
+            examService = new ExamSimulationService(dbContext, multipleChoiceSetService);
 
             examService.CreateExamList(15);
             examList = examService.GetExamList();
@@ -384,6 +456,12 @@ namespace ProjektarbeitLernAppGUI
 
         }
 
+        /// <summary>
+        /// Diese Methode wird aufgerufen, um das Zeichnen eines TabPage-Tabs im TabControl2 zu steuern.
+        /// Sie ermöglicht die Anpassung der TabPage-Farbe basierend auf der Validierung und die Ausrichtung des Texts.
+        /// </summary>
+        /// <param name="sender">Das auslösende Objekt.</param>
+        /// <param name="e">Das Event-Argument.</param>
         private void TabControl2_DrawItem(object sender, DrawItemEventArgs e)
         {
             TabPage page = tabControl2.TabPages[e.Index];
@@ -410,7 +488,12 @@ namespace ProjektarbeitLernAppGUI
             }
         }
 
-
+        /// <summary>
+        /// Diese Methode wird aufgerufen, wenn sich der Wert einer Zelle in der DataGridView ändert.
+        /// Sie überwacht Änderungen an den gegebenen Antworten und aktualisiert die Prüfungsergebnisse entsprechend.
+        /// </summary>
+        /// <param name="sender">Das auslösende Objekt.</param>
+        /// <param name="e">Das Event-Argument.</param>
         private void DataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 3)
@@ -428,6 +511,12 @@ namespace ProjektarbeitLernAppGUI
             }
         }
 
+        /// <summary>
+        /// Aktualisiert die gegebene Antwort in einem MultipleChoiceSet basierend auf den übergebenen Parametern.
+        /// </summary>
+        /// <param name="multipleChoiceSetId">Die ID des MultipleChoiceSets.</param>
+        /// <param name="answerId">Die ID der Antwort.</param>
+        /// <param name="isChecked">Gibt an, ob die Antwort ausgewählt wurde.</param>
         private void UpdateAnswerInMultipleChoiceSet(int multipleChoiceSetId, int answerId, bool isChecked)
         {
             var multipleChoiceSet = examList.Find(set => set.Id == multipleChoiceSetId);
@@ -444,7 +533,12 @@ namespace ProjektarbeitLernAppGUI
             }
         }
 
-
+        /// <summary>
+        /// Diese Methode wird aufgerufen, wenn der Index im tabControl1 geändert wird.
+        /// Sie aktualisiert die Benutzeroberfläche basierend auf dem ausgewählten Tab.
+        /// </summary>
+        /// <param name="sender">Das auslösende Objekt.</param>
+        /// <param name="e">Das Event-Argument.</param>
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             examList = new List<MultipleChoiceSet>();
@@ -461,6 +555,12 @@ namespace ProjektarbeitLernAppGUI
             }
         }
 
+        /// <summary>
+        /// Diese Methode wird aufgerufen, wenn der "Löschen"-Button (button5) geklickt wird.
+        /// Sie löscht eine Routine basierend auf der ausgewählten Zeile in der dataGridView1.
+        /// </summary>
+        /// <param name="sender">Das auslösende Objekt.</param>
+        /// <param name="e">Das Event-Argument.</param>
         private void button5_Click(object sender, EventArgs e)
         {
             if (dataGridView1.CurrentRow != null)
@@ -478,23 +578,44 @@ namespace ProjektarbeitLernAppGUI
             }
         }
 
+        /// <summary>
+        /// Diese Methode wird aufgerufen, wenn der "Nächste" Button (button4) in der TabControl2 geklickt wird.
+        /// Sie wechselt zur nächsten Registerkarte, sofern verfügbar.
+        /// </summary>
+        /// <param name="sender">Das auslösende Objekt.</param>
+        /// <param name="e">Das Event-Argument.</param>
         private void button4_Click(object sender, EventArgs e)
         {
             if (tabControl2.SelectedIndex < tabControl2.TabCount - 1)
                 tabControl2.SelectedIndex++;
         }
 
+        /// <summary>
+        /// Diese Methode wird aufgerufen, wenn der "Vorherige" Button (button8) in der TabControl2 geklickt wird.
+        /// Sie wechselt zur vorherigen Registerkarte, sofern verfügbar.
+        /// </summary>
+        /// <param name="sender">Das auslösende Objekt.</param>
+        /// <param name="e">Das Event-Argument.</param>
         private void button8_Click(object sender, EventArgs e)
         {
             if (tabControl2.SelectedIndex > 0)
                 tabControl2.SelectedIndex--;
         }
 
+        /// <summary>
+        /// Diese Methode wird aufgerufen, wenn der "Validieren" Button (button9) geklickt wird.
+        /// Sie führt die Validierung der Prüfung durch.
+        /// </summary>
+        /// <param name="sender">Das auslösende Objekt.</param>
+        /// <param name="e">Das Event-Argument.</param>
         private void button9_Click(object sender, EventArgs e)
         {
             ValidateExam();
         }
 
+        /// <summary>
+        /// Validiert die Prüfungsergebnisse und speichert die Ergebnisse.
+        /// </summary>
         private void ValidateExam()
         {
             List<MultipleChoiceSet> multipleChoiceSetList = new List<MultipleChoiceSet>();
@@ -537,7 +658,7 @@ namespace ProjektarbeitLernAppGUI
             {
                 MultipleChoiceList = JsonSerializer.Serialize(multipleChoiceSetList),
                 HasPassed = hasPassed,
-                Sutdent_Id = user.Id
+                User_Id = user.Id
             });
 
             button9.Enabled = false;
@@ -548,12 +669,24 @@ namespace ProjektarbeitLernAppGUI
             tabControl2.Invalidate();
         }
 
+        /// <summary>
+        /// Diese Methode wird aufgerufen, wenn der "Schließen" Button (button10) in der Prüfungssimulation geklickt wird.
+        /// Sie blendet das Panel zur Prüfungssimulation aus und startet den Timer für die Prüfungszeit.
+        /// </summary>
+        /// <param name="sender">Das auslösende Objekt.</param>
+        /// <param name="e">Das Event-Argument.</param>
         private void button10_Click(object sender, EventArgs e)
         {
             panel4.Visible = false;
             timer1.Enabled = true;
         }
 
+        /// <summary>
+        /// Diese Methode wird aufgerufen, wenn der Timer für die Prüfungszeit (timer1) tickt.
+        /// Sie aktualisiert die verbleibende Prüfungszeit und überprüft, ob die Zeit abgelaufen ist, um die Prüfung zu validieren.
+        /// </summary>
+        /// <param name="sender">Das auslösende Objekt.</param>
+        /// <param name="e">Das Event-Argument.</param>
         private void timer1_Tick(object sender, EventArgs e)
         {
             examTime = examTime.Subtract(TimeSpan.FromSeconds(1));
@@ -564,6 +697,12 @@ namespace ProjektarbeitLernAppGUI
                 ValidateExam();
         }
 
+        /// <summary>
+        /// Diese Methode wird aufgerufen, wenn der "E-Mail ändern" Button (button6) geklickt wird.
+        /// Sie aktualisiert die E-Mail-Adresse des Benutzers und zeigt eine Erfolgsmeldung an.
+        /// </summary>
+        /// <param name="sender">Das auslösende Objekt.</param>
+        /// <param name="e">Das Event-Argument.</param>
         private void button6_Click(object sender, EventArgs e)
         {
             user.Email = txtEmail.Text;

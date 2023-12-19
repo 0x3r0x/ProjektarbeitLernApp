@@ -8,12 +8,20 @@ using Task = Microsoft.Win32.TaskScheduler.Task;
 
 namespace ProjektarbeitLernApp.Service
 {
+    /// <summary>
+    /// Verwaltet automatisierte Aufgaben mithilfe des Windows-Aufgabenplaners.
+    /// Ermöglicht das Erstellen, Löschen und Abrufen geplanter Aufgaben, die mit der Lernanwendung verknüpft sind.
+    /// </summary>
     public class RoutineService
     {
         private static string exeDirectory = AppDomain.CurrentDomain.BaseDirectory;
         private static string exePath = Path.Combine(exeDirectory, AppDomain.CurrentDomain.FriendlyName) + ".exe";
         private static string routinePrefix = "[ProjektarbeitLernApp] ";
 
+        /// <summary>
+        /// Löscht eine spezifische Routine basierend auf ihrem Namen.
+        /// </summary>
+        /// <param name="routineName">Name der zu löschenden Routine.</param>
         public void Delete(string routineName)
         {
             using (TaskService ts = new TaskService())
@@ -36,6 +44,9 @@ namespace ProjektarbeitLernApp.Service
             }
         }
 
+        /// <summary>
+        /// Löscht alle Routinen, die mit dem vordefinierten Präfix beginnen.
+        /// </summary>
         public void DeleteAll()
         {
             using (TaskService ts = new TaskService())
@@ -58,6 +69,10 @@ namespace ProjektarbeitLernApp.Service
             }
         }
 
+        /// <summary>
+        /// Ruft alle Routinen ab, die mit dem vordefinierten Präfix beginnen.
+        /// </summary>
+        /// <returns>Eine Liste von Tasks, die den Routinen entsprechen.</returns>
         public List<Task> GetAll()
         {
             try
@@ -82,6 +97,11 @@ namespace ProjektarbeitLernApp.Service
             }
         }
 
+        /// Erstellt eine neue Routine mit einem gegebenen Namen und Startzeitpunkt.
+        /// </summary>
+        /// <param name="routineName">Name der neuen Routine.</param>
+        /// <param name="startTime">Startzeit der Routine.</param>
+        /// <returns>True, wenn die Routine erfolgreich erstellt wurde, sonst False.</returns>
         public bool Create(string routineName, DateTime startTime)
         {
             try

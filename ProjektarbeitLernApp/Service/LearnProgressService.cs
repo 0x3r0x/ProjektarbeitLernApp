@@ -10,19 +10,29 @@ using System.Threading.Tasks;
 namespace ProjektarbeitLernApp.Service
 {
     /// <summary>
-    /// 
+    /// Verwaltet den Lernfortschritt der Benutzer. Dieser Service interagiert mit der Datenbank und dem Statistik-Service.
     /// </summary>
     public class LearnProgressService
     {
         private DatabasePLAContext dbContext;
         private StatisticService statisticService;
 
+        /// <summary>
+        /// Konstruktor für LearnProgressService.
+        /// </summary>
+        /// <param name="dbContext">Datenbankkontext für den Zugriff auf die Datenbank.</param>
+        /// <param name="statisticService">Service für die Verwaltung von Benutzerstatistiken.</param>
         public LearnProgressService(DatabasePLAContext dbContext, StatisticService statisticService)
         {
             this.dbContext = dbContext;
             this.statisticService = statisticService;
         }
 
+        /// <summary>
+        /// Überprüft, ob die gegebenen Antworten korrekt sind.
+        /// </summary>
+        /// <param name="givenAnswer">Liste der gegebenen Antworten.</param>
+        /// <returns>True, wenn alle Antworten korrekt sind, sonst False.</returns>
         public bool ValidateAnswer(List<Answers> givenAnswer)
         {
             if (givenAnswer == null)
@@ -37,9 +47,13 @@ namespace ProjektarbeitLernApp.Service
             return true;
         }
 
+        /// <summary>
+        /// Speichert den Lernfortschritt eines Benutzers.
+        /// </summary>
+        /// <param name="learnProgress">Lernfortschrittsdaten, die gespeichert werden sollen.</param>
         public void SaveLearnProgress(LearnProgress learnProgress)
         {
-            var isAlreadySaved = dbContext.LearnProgress.Any(e => e.Student_Id.Equals(learnProgress.Student_Id) && e.MultipleChoiceSet_Id.Equals(learnProgress.MultipleChoiceSet_Id));
+            var isAlreadySaved = dbContext.LearnProgress.Any(e => e.User_Id.Equals(learnProgress.User_Id) && e.MultipleChoiceSet_Id.Equals(learnProgress.MultipleChoiceSet_Id));
 
             if (!isAlreadySaved)
             {
@@ -47,9 +61,14 @@ namespace ProjektarbeitLernApp.Service
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// Überprüft, ob alle Multiple-Choice-Sets einem Studenten bereits gezeigt wurden.
+        /// </summary>
+        /// <param name="studentId">Die ID des Studenten.</param>
         private void CheckIfAllWasShown(int studentId)
         {
-            var dbLearnProgress = dbContext.LearnProgress.Where(e => e.Student_Id.Equals(studentId)).ToList();
+            var dbLearnProgress = dbContext.LearnProgress.Where(e => e.User_Id.Equals(studentId)).ToList();
             foreach (var learnProgress in dbLearnProgress)
             {
                 if (learnProgress.WasShown == false)
@@ -59,9 +78,13 @@ namespace ProjektarbeitLernApp.Service
             ResetWasShown(studentId);
         }
 
+        /// <summary>
+        /// Setzt das "WasShown"-Attribut für alle Lernfortschritte eines Studenten zurück.
+        /// </summary>
+        /// <param name="studentId">Die ID des Studenten.</param>
         private void ResetWasShown(int studentId)
         {
-            var dbLearnProgress = dbContext.LearnProgress.Where(e => e.Student_Id.Equals(studentId)).ToList();
+            var dbLearnProgress = dbContext.LearnProgress.Where(e => e.User_Id.Equals(studentId)).ToList();
             foreach (var learnProgress in dbLearnProgress)
             {
                 learnProgress.WasShown = false;
@@ -71,14 +94,19 @@ namespace ProjektarbeitLernApp.Service
             dbContext.SaveChanges();
         }
 
+        /// <summary>
+        /// Aktualisiert den Lernfortschritt eines Benutzers basierend auf gegebenen Antworten und Statistiken.
+        /// </summary>
+        /// <param name="learnProgress">Das Objekt des Lernfortschritts.</param>
+        /// <param name="statistic">Das Objekt der Statistik, die aktualisiert werden soll.</param>
         public void UpdateLearnProgress(LearnProgress learnProgress, Statistic statistic)
         {
-            var dbLearnProgress = dbContext.LearnProgress.FirstOrDefault(e => e.Student_Id.Equals(learnProgress.Student_Id) && e.MultipleChoiceSet_Id.Equals(learnProgress.MultipleChoiceSet_Id));
+            var dbLearnProgress = dbContext.LearnProgress.FirstOrDefault(e => e.User_Id.Equals(learnProgress.User_Id) && e.MultipleChoiceSet_Id.Equals(learnProgress.MultipleChoiceSet_Id));
             if (dbLearnProgress == null)
                 return;
 
             dbLearnProgress.WasShown = true;
-            CheckIfAllWasShown(learnProgress.Student_Id);
+            CheckIfAllWasShown(learnProgress.User_Id);
 
             if (statistic.WasKnown && dbLearnProgress.Stage < 6)
             {
@@ -95,26 +123,41 @@ namespace ProjektarbeitLernApp.Service
             dbContext.SaveChanges();
         }
 
+        /// <summary>
+        /// Ermittelt die ID des nächsten Multiple-Choice-Sets, das ein Benutzer lernen sollte.
+        /// </summary>
+        /// <param name="user">Das Benutzerobjekt.</param>
+        /// <returns>Die ID des nächsten Multiple-Choice-Sets.</returns>
         public int GetNextMultipleChoiceSetIDToLearn(User user)
         {
-            return dbContext.LearnProgress.Where(e => e.Student_Id.Equals(user.Id)).OrderBy(e => e.WasShown).ThenBy(e => e.Stage).FirstOrDefault().MultipleChoiceSet_Id;
+            return dbContext.LearnProgress.Where(e => e.User_Id.Equals(user.Id)).OrderBy(e => e.WasShown).ThenBy(e => e.Stage).FirstOrDefault().MultipleChoiceSet_Id;
         }
 
+        /// <summary>
+        /// Initialisiert den Lernfortschritt für einen Benutzer mit einer Liste von Multiple-Choice-Sets.
+        /// </summary>
+        /// <param name="multipleChoiceSetList">Liste von Multiple-Choice-Sets.</param>
+        /// <param name="user">Das Benutzerobjekt.</param>
         public void InitiateLearnProgress(List<MultipleChoiceSet> multipleChoiceSetList, User user)
         {
             foreach (var set in multipleChoiceSetList)
             {
                 SaveLearnProgress(new LearnProgress()
                 {
-                    Student_Id = user.Id,
+                    User_Id = user.Id,
                     MultipleChoiceSet_Id = set.Id
                 });
             }
         }
 
+        /// <summary>
+        /// Berechnet die Prüfungsreife eines Benutzers als prozentualen Wert.
+        /// </summary>
+        /// <param name="user">Das Benutzerobjekt.</param>
+        /// <returns>Die Prüfungsreife des Benutzers als prozentualer Wert.</returns>
         public int GetExamRipeness(User user)
         {
-            var learnProgressEntries = dbContext.LearnProgress.Where(e => e.Student_Id.Equals(user.Id)).ToList();
+            var learnProgressEntries = dbContext.LearnProgress.Where(e => e.User_Id.Equals(user.Id)).ToList();
 
             if (!learnProgressEntries.Any())
                 return 0;

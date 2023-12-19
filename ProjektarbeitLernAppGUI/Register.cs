@@ -15,6 +15,9 @@ using System.Windows.Forms;
 
 namespace ProjektarbeitLernAppGUI
 {
+    /// <summary>
+    /// Stellt das Registrierungsformular der Anwendung dar und verarbeitet die Benutzerregistrierung.
+    /// </summary>
     public partial class Register : Form
     {
         private UserService userService;
@@ -22,6 +25,10 @@ namespace ProjektarbeitLernAppGUI
         private LearnProgressService learnProgressService;
         private MultipleChoiceSetService multipleChoiceSetService;
 
+        /// <summary>
+        /// Konstruktor für das Registrierungsformular. Initialisiert benötigte Services.
+        /// </summary>
+        /// <param name="dbContext">Datenbankkontext für Datenbankoperationen.</param>
         public Register(DatabasePLAContext dbContext)
         {
             var userService = new UserService(dbContext);
@@ -36,6 +43,9 @@ namespace ProjektarbeitLernAppGUI
             this.StartPosition = FormStartPosition.CenterScreen;
         }
 
+        /// <summary>
+        /// Zeigt das Login-Formular an und verbirgt das aktuelle Registrierungsformular.
+        /// </summary>
         private void btnShowLogin_Click(object sender, EventArgs e)
         {
             var loginForm = new Login(dbContext);
@@ -43,6 +53,9 @@ namespace ProjektarbeitLernAppGUI
             this.Hide();
         }
 
+        /// <summary>
+        /// Verarbeitet die Benutzerregistrierung und initiiert den Lernfortschritt.
+        /// </summary>
         private void btnRegister_Click(object sender, EventArgs e)
         {
             if (txtPassword1.Text != txtPassword2.Text) {
@@ -66,6 +79,10 @@ namespace ProjektarbeitLernAppGUI
                 var loginForm = new Login(dbContext);
                 loginForm.Show();
                 this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Fehler bei der Registrierung. Eventuell ist die E-Mail bereits vergeben");
             }
         }
     }

@@ -15,33 +15,53 @@ namespace ProjektarbeitLernApp.Service
     /// </summary>
     public class ExamSimulationService
     {
-        private LearnProgressService learnProgressService;
         private MultipleChoiceSetService multipleChoiceSetService;
         private List<MultipleChoiceSet> multipleChoiceSetList;
         private DatabasePLAContext dbContext;
 
-        public ExamSimulationService(DatabasePLAContext dbContext, LearnProgressService learnProgressService, MultipleChoiceSetService multipleChoiceSetService)
+        /// <summary>
+        /// Konstruktor für ExamSimulationService.
+        /// </summary>
+        /// <param name="multipleChoiceSetService">Der Service für Multiple-Choice-Fragen-Sets.</param>
+        /// <param name="dbContext">Der Datenbankkontext für Datenbankoperationen.</param>
+        public ExamSimulationService(DatabasePLAContext dbContext,MultipleChoiceSetService multipleChoiceSetService)
         {
-            this.learnProgressService = learnProgressService;
             this.multipleChoiceSetService = multipleChoiceSetService;
             this.dbContext = dbContext;
-        }   
+        }
 
+        /// <summary>
+        /// Erstellt eine Liste von Prüfungsfragen basierend auf der angegebenen Anzahl.
+        /// </summary>
+        /// <param name="numberOfQuestions">Die Anzahl der Fragen, die in der Prüfung enthalten sein sollen.</param>
         public void CreateExamList(int numberOfQuestions)
         {
             this.multipleChoiceSetList = multipleChoiceSetService.GetMultipleChoiceSets(numberOfQuestions).ToList();
         }
-        
+
+        /// <summary>
+        /// Gibt die aktuelle Liste der Prüfungsfragen zurück.
+        /// </summary>
+        /// <returns>Eine Liste von Multiple-Choice-Fragen-Sets.</returns>
         public List<MultipleChoiceSet> GetExamList()
         {
             return multipleChoiceSetList;
         }
 
+        /// <summary>
+        /// Aktualisiert die Liste der Prüfungsfragen.
+        /// </summary>
+        /// <param name="multipleChoiceSetList">Die neue Liste von Multiple-Choice-Fragen-Sets.</param>
         public void UpdateExamList(List<MultipleChoiceSet> multipleChoiceSetList) 
         {
             this.multipleChoiceSetList = multipleChoiceSetList;
         }
 
+        /// <summary>
+        /// Speichert eine Prüfungssimulation in der Datenbank.
+        /// </summary>
+        /// <param name="examSimulation">Das Objekt der Prüfungssimulation, das gespeichert werden soll.</param>
+        /// <returns>True, wenn das Speichern erfolgreich war, andernfalls False.</returns>
         public bool SaveExamSimulation(ExamSimulation examSimulation)
         {
             dbContext.ExamSimulation.Add(examSimulation);
